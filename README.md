@@ -69,15 +69,15 @@
 
 All multi-agent patterns feature deterministic state transitions, cycle protection, and zero state loss under failure:
 
-| Agentic Pattern | Base Reference Project | Advanced Enterprise Variant | Key Technical Innovation | Reference Blueprint |
+| Agentic Pattern | Base Reference Project | Advanced Enterprise Variant | Key Technical Innovation | Orchestration Architecture |
 | :--- | :--- | :--- | :--- | :--- |
-| **1. Reflection** | AI Code Review Assistant | Multi-Language Security Reviewer | Actor-Critic dual-agent loop with AST parsing | [`01_agentic_patterns/`](./01_agentic_patterns/) |
-| **2. Tool Use** | Market Research Agent | Competitive Intelligence Engine | Model Context Protocol (MCP) tool integration | [`03_mcp_gateway/`](./03_mcp_gateway/) |
-| **3. Planning** | Content Strategy Planner | Campaign Multi-Agent Orchestrator | Hierarchical DAG task decomposition & dynamic replan | [`01_agentic_patterns/`](./01_agentic_patterns/) |
-| **4. ReAct** | Financial Analysis Agent | Investment Portfolio Analyzer | Structured Thought-Action-Observation loop with SEC data | [`01_agentic_patterns/`](./01_agentic_patterns/) |
-| **5. Multi-Agent** | Content Studio (4 Agents) | Investor Pitch Deck Generator | **4x faster output, 92% quality score**, shared state | [`01_agentic_patterns/`](./01_agentic_patterns/) |
-| **6. Sequential** | Document Processing Pipeline | Legal Contract Analyzer | Multi-stage schema validation with Dead Letter Queue | [`01_agentic_patterns/`](./01_agentic_patterns/) |
-| **7. HITL Gate** | Medical Diagnosis Aid | Mortgage Loan Approver | **100 interrupt-resume cycles with 0 state loss** | [`01_agentic_patterns/`](./01_agentic_patterns/) |
+| **1. Reflection** | AI Code Review Assistant | Multi-Language Security Reviewer | Actor-Critic dual-agent loop with AST parsing | **LangGraph Cyclic StateGraph** (Actor-Critic loop) |
+| **2. Tool Use** | Market Research Agent | Competitive Intelligence Engine | Model Context Protocol (MCP) tool integration | **Centralized MCP JSON-RPC Gateway** ([`03_mcp_gateway/`](./03_mcp_gateway/)) |
+| **3. Planning** | Content Strategy Planner | Campaign Multi-Agent Orchestrator | Hierarchical DAG task decomposition & dynamic replan | **Hierarchical DAG Planner** & Task Graph Engine |
+| **4. ReAct** | Financial Analysis Agent | Investment Portfolio Analyzer | Structured Thought-Action-Observation loop with SEC data | **Stateful ReAct Engine** with Pydantic V2 Schema Gating |
+| **5. Multi-Agent** | Content Studio (4 Agents) | Investor Pitch Deck Generator | **4x faster output, 92% quality score**, shared state | **Supervisor-Worker Multi-Agent Swarm** |
+| **6. Sequential** | Document Processing Pipeline | Legal Contract Analyzer | Multi-stage schema validation with Dead Letter Queue | **Pipelined Async Stream** with Dead Letter Queue |
+| **7. HITL Gate** | Medical Diagnosis Aid | Mortgage Loan Approver | **100 interrupt-resume cycles with 0 state loss** | **LangGraph `interrupt_before`** + Point-in-Time Checkpointer ([`01_agentic_patterns/`](./01_agentic_patterns/)) |
 
 ---
 
