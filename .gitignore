@@ -1,0 +1,22 @@
+# Python bytecode & cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.pytest_cache/
+
+# Virtual Environments
+.venv/
+venv/
+env/
+
+# Environment Variables & Secrets (Zero Secrets Policy)
+.env
+.env.*
+*.pem
+*.key
+*.token
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
