@@ -10,9 +10,9 @@ This document details the architecture, component flow, and technical implementa
 ### Architecture
 ```mermaid
 graph TD
-    Client["AI Agent / Client"] -->|JSON-RPC Request| API[FastAPI Server]
+    Client["AI Agent Client"] -->|JSON-RPC Request| API[FastAPI Server]
     API -->|Route Handler| Manager[MCP Manager]
-    Manager -->|Query| DB["(SQLite Database)"]
+    Manager -->|Query| DB["SQLite Database"]
     DB -->|Result| Manager
     Manager -->|JSON-RPC Response| Client
 ```
@@ -35,7 +35,6 @@ sequenceDiagram
     participant SupportAgent
     participant Redis as Redis Pub/Sub
     participant OrderAgent
-    
     User->>SupportAgent: "Where is my order #123?"
     SupportAgent->>Redis: Publish event: request.order_info
     Redis->>OrderAgent: Deliver event
@@ -82,10 +81,9 @@ graph LR
 ### Architecture
 ```mermaid
 graph TD
-    Docs["PDFs/Text"] -->|Ingest| Splitter[Text Splitter]
+    Docs["PDF and Text Documents"] -->|Ingest| Splitter[Text Splitter]
     Splitter -->|Embed| Model[Embedding Model]
-    Model -->|Upsert| VectorDB["(Chroma/Qdrant)"]
-    
+    Model -->|Upsert| VectorDB["Chroma and Qdrant Vector Store"]
     User -->|Query| Chain[RAG Chain]
     Chain -->|Search| VectorDB
     VectorDB -->|Context| Chain
@@ -171,7 +169,7 @@ graph TD
 ```mermaid
 graph TD
     Data --> Embedder[Embedding Service]
-    Embedder -->|Vectors| Qdrant["(Qdrant Cluster)"]
+    Embedder -->|Vectors| Qdrant["Qdrant Cluster"]
     Qdrant -->|HNSW Index| Storage
     Query -->|Search| Qdrant
     Qdrant -->|ANN| Results
@@ -190,8 +188,8 @@ graph TD
 ### Architecture
 ```mermaid
 graph TD
-    Query --> Dense["Vector Search (Semantic)"]
-    Query --> Sparse["BM25 Search (Keyword)"]
+    Query --> Dense["Vector Search Semantic"]
+    Query --> Sparse["BM25 Keyword Search"]
     Dense --> Results1
     Sparse --> Results2
     Results1 --> Fusion[Reciprocal Rank Fusion]
@@ -215,8 +213,8 @@ graph TD
     Input --> PII[PII Detector]
     PII -->|Pass| Topics[Topic Filter]
     Topics -->|Pass| LLM
-    LLM --> output
-    output --> Hallucination[Fact Checker]
+    LLM --> LLMOutput["Model Output"]
+    LLMOutput["Model Output"] --> Hallucination[Fact Checker]
     Hallucination -->|Safe| User
     Hallucination -->|Unsafe| Block[Refusal Message]
 ```
@@ -311,8 +309,8 @@ graph TD
     UserQuery --> Cache{Semantic Cache}
     Cache -->|Hit| Return[Cached Response]
     Cache -->|Miss| Router{Model Router}
-    Router -->|Simple| GPT3["GPT-3.5"]
-    Router -->|Complex| GPT4[GPT-4]
+    Router -->|Simple| GPT3["GPT-3.5 Model"]
+    Router -->|Complex| GPT4["GPT-4 Model"]
     GPT3 --> |Response| Tracker[Cost Tracker]
     GPT4 --> |Response| Tracker[Cost Tracker]
     Tracker -->|Update| Cache
@@ -381,7 +379,7 @@ graph TD
 ```mermaid
 graph LR
     Text --> Extractor[Entity Extractor]
-    Extractor -->|Triples| GraphDB["(NetworkX/Neo4j)"]
+    Extractor -->|Triples| GraphDB["NetworkX and Neo4j"]
     Query -->|Entities| GraphDB
     GraphDB -->|Neighbors| Context
     Context -->|Augment| LLM
@@ -402,7 +400,7 @@ graph LR
 ### Architecture
 ```mermaid
 graph TD
-    Source[Order Service] -->|Publish| Bus["Message Bus (Kafka)"]
+    Source[Order Service] -->|Publish| Bus["Kafka Message Bus"]
     Bus -->|Subscribe| Consumer[Agent Consumer]
     Consumer -->|Process| Logic[Business Logic]
     Logic -->|Publish| Bus
@@ -426,8 +424,8 @@ graph TD
     Agent -->|Log Request| Logger[JSON Logger]
     Agent -->|Measure Latency| Metrics[Prometheus Client]
     Agent -->|Trace Span| Tracer[OpenTelemetry]
-    Metrics -->|Scrape| dashboard["Grafana/Prometheus"]
-    Tracer -->|Export| Jaeger["Console / Jaeger"]
+    Metrics -->|Scrape| dashboard["Grafana and Prometheus"]
+    Tracer -->|Export| Jaeger["Console and Jaeger"]
 ```
 
 ### Component Flow
@@ -444,10 +442,10 @@ graph TD
 ### Architecture
 ```mermaid
 graph TD
-    Dev -->|Push| Loop["CI/CD"]
+    Dev -->|Push| Loop["CI and CD Pipeline"]
     Loop -->|Build| Docker[Docker Image]
     Loop -->|Terraform| Infra[AWS EKS]
-    Loop -->|Helm / Manifests| K8s[Kubernetes Cluster]
+    Loop -->|Helm and Manifests| K8s[Kubernetes Cluster]
     K8s -->|Pod| Container[Agent Container]
     Container -->|Service| LoadBalancer
 ```
