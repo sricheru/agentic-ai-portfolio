@@ -9,12 +9,12 @@ This document details the architecture, component flow, and technical implementa
 
 ### Architecture
 ```mermaid
-graph TD
-    Client["AI Agent Client"] -->|1. JSON-RPC Request| Gateway["FastAPI MCP Gateway"]
-    Gateway -->|2. Route to Tool| ToolManager["MCP Tool Manager"]
-    ToolManager -->|3. Query Enterprise DB| Database["SQLite / Postgres DB"]
-    Database -->|4. Tool Results| Formatter["MCP ToolResult Formatter"]
-    Formatter -->|5. Standardized Response| Client
+flowchart TD
+    Client[AI Agent Client] -->|JSON-RPC Request| Gateway[FastAPI MCP Gateway]
+    Gateway --> ToolManager[MCP Tool Manager]
+    ToolManager --> Database[SQLite / Postgres DB]
+    Database --> Formatter[ToolResult Formatter]
+    Formatter -->|JSON-RPC Response| Client
 ```
 
 ### Component Flow
@@ -57,15 +57,15 @@ sequenceDiagram
 
 ### Architecture
 ```mermaid
-graph LR
-    StartNode["Input Query"] --> Router{"Router Agent"}
-    Router -->|Document Analysis| Classifier["Document Classifier"]
-    Router -->|Data Extraction| Extractor["Entity Extractor"]
-    Classifier --> StateReducer["Shared State Container"]
+flowchart LR
+    StartNode[Input Query] --> Router{Router Agent}
+    Router --> Classifier[Document Classifier]
+    Router --> Extractor[Entity Extractor]
+    Classifier --> StateReducer[Shared State Container]
     Extractor --> StateReducer
-    StateReducer --> Evaluator{"Quality Evaluator"}
-    Evaluator -->|Score < 0.85| Router
-    Evaluator -->|Score >= 0.85| EndNode["Final Output"]
+    StateReducer --> Evaluator{Quality Evaluator}
+    Evaluator -->|Retry| Router
+    Evaluator -->|Approved| EndNode[Final Output]
 ```
 
 ### Component Flow
@@ -81,16 +81,15 @@ graph LR
 
 ### Architecture
 ```mermaid
-graph TD
-    Docs["PDF and Text Documents"] --> Ingestion["Text Chunking & Splitting"]
-    Ingestion --> Embedder["Embedding Service"]
-    Embedder --> VectorDB["Chroma / Qdrant Vector Store"]
-
-    User["User Query"] --> QueryEngine["RAG Retrieval Chain"]
-    QueryEngine -->|Semantic Similarity Search| VectorDB
-    VectorDB -->|Retrieved Context Chunks| ContextBuilder["Context Prompt Builder"]
-    ContextBuilder --> LLM["LLM Generation"]
-    LLM --> Answer["Grounded Response"]
+flowchart TD
+    Docs[PDF and Text Documents] --> Chunking[Text Chunking & Splitting]
+    Chunking --> Embedder[Embedding Service]
+    Embedder --> VectorDB[Chroma / Qdrant Vector Store]
+    User[User Query] --> QueryEngine[RAG Retrieval Chain]
+    QueryEngine --> VectorDB
+    VectorDB --> ContextBuilder[Context Prompt Builder]
+    ContextBuilder --> LLM[LLM Generation]
+    LLM --> Answer[Grounded Response]
 ```
 
 ### Component Flow
@@ -106,14 +105,14 @@ graph TD
 
 ### Architecture
 ```mermaid
-graph TD
-    Goal["User Goal"] --> Planner["Planning Engine"]
-    Planner --> Loop{"Thought-Action Loop"}
-    Loop -->|Select Tool| ToolDispatcher["Tool Interface"]
-    ToolDispatcher -->|Execute API| Env["External Environment"]
-    Env -->|Tool Observation| Reasoning["Reasoning Engine"]
-    Reasoning -->|Update Context| Loop
-    Loop -->|Goal Satisfied| Result["Final Answer"]
+flowchart TD
+    Goal[User Goal] --> Planner[Planning Engine]
+    Planner --> Loop{Thought-Action Loop}
+    Loop --> ToolDispatcher[Tool Interface]
+    ToolDispatcher --> Env[External APIs & Tools]
+    Env --> Reasoning[Reasoning Engine]
+    Reasoning --> Loop
+    Loop -->|Complete| Result[Final Answer]
 ```
 
 ### Component Flow
@@ -129,12 +128,12 @@ graph TD
 
 ### Architecture
 ```mermaid
-graph LR
-    UserQuery["User Query"] --> Template["Prompt Template Engine"]
-    Template --> Logic["Prompt Strategy Manager"]
-    Logic --> LLM["LLM Inference"]
-    LLM --> Eval["Evaluation & Scoring"]
-    Eval -->|Optimization Feedback| Template
+flowchart LR
+    UserQuery[User Query] --> Template[Prompt Template Engine]
+    Template --> Logic[Prompt Strategy Manager]
+    Logic --> LLM[LLM Inference]
+    LLM --> Eval[Evaluation & Scoring]
+    Eval -->|Feedback| Template
 ```
 
 ### Component Flow
@@ -149,14 +148,14 @@ graph LR
 
 ### Architecture
 ```mermaid
-graph TD
-    Code["Git Push"] --> CI["GitHub Actions Runner"]
-    CI --> Lint["Ruff Lint & Type Check"]
-    Lint --> Security["Bandit & Gitleaks Scan"]
-    Security --> Pytest["Unit Tests (>85% Gate)"]
-    Pytest --> Ragas["RAGAS Eval Benchmark"]
-    Ragas -->|Pass (>=0.85)| CD["Deploy Canary Pods"]
-    CD --> Prod["Production EKS Cluster"]
+flowchart TD
+    Code[Git Push] --> CI[GitHub Actions Runner]
+    CI --> Lint[Ruff Lint & Type Check]
+    Lint --> Security[Bandit & Security Scan]
+    Security --> Pytest[Unit Tests Gate]
+    Pytest --> Ragas[RAGAS Eval Benchmark]
+    Ragas -->|Passed| CD[Deploy Canary Pods]
+    CD --> Prod[Production EKS Cluster]
 ```
 
 ### Component Flow
@@ -172,12 +171,12 @@ graph TD
 
 ### Architecture
 ```mermaid
-graph TD
-    RawData["Raw Documents"] --> Embedder["Embedding Service"]
-    Embedder -->|Dense Vectors| QdrantCluster["Qdrant Vector Cluster"]
-    QdrantCluster --> Index["HNSW Indexing Engine"]
-    QueryVector["Query Vector"] --> Index
-    Index -->|ANN Cosine Distance| RankedResults["Top-K Matching Chunks"]
+flowchart TD
+    RawData[Raw Documents] --> Embedder[Embedding Service]
+    Embedder --> QdrantCluster[Qdrant Vector Cluster]
+    QdrantCluster --> Index[HNSW Indexing Engine]
+    QueryVector[Query Vector] --> Index
+    Index --> RankedResults[Top-K Matching Chunks]
 ```
 
 ### Component Flow
@@ -192,15 +191,15 @@ graph TD
 
 ### Architecture
 ```mermaid
-graph TD
-    Query["User Query"] --> Dense["Vector Search (Semantic)"]
-    Query --> Sparse["BM25 Search (Keyword)"]
-    Dense --> DenseHits["Dense Score List"]
-    Sparse --> SparseHits["Sparse Score List"]
-    DenseHits --> RRF["Reciprocal Rank Fusion (RRF)"]
+flowchart TD
+    Query[User Query] --> Dense[Vector Search - Semantic]
+    Query --> Sparse[BM25 Search - Keyword]
+    Dense --> DenseHits[Dense Hits List]
+    Sparse --> SparseHits[Sparse Hits List]
+    DenseHits --> RRF[Reciprocal Rank Fusion RRF]
     SparseHits --> RRF
-    RRF --> CrossEncoder["Cross-Encoder Reranker"]
-    CrossEncoder --> FinalResults["Top-K Re-ranked Documents"]
+    RRF --> CrossEncoder[Cross-Encoder Reranker]
+    CrossEncoder --> FinalResults[Top-K Re-ranked Documents]
 ```
 
 ### Component Flow
@@ -215,14 +214,14 @@ graph TD
 
 ### Architecture
 ```mermaid
-graph TD
-    RawInput["User Input"] --> PII["PII / PHI Redactor (spaCy NER)"]
-    PII -->|Cleaned Text| Sandbox["Prompt Injection Delimiter Guard"]
-    Sandbox -->|Safe Payload| Model["LLM Inference Engine"]
-    Model --> RawResponse["Model Response"]
-    RawResponse --> SchemaValidator["Pydantic V2 Schema Gate"]
-    SchemaValidator -->|Valid Schema| SafeOutput["Sanitized Response"]
-    SchemaValidator -->|Validation Error| Fallback["Safe Refusal Handler"]
+flowchart TD
+    RawInput[User Input] --> PII[PII / PHI Redactor]
+    PII --> Sandbox[Prompt Injection Guard]
+    Sandbox --> Model[LLM Inference Engine]
+    Model --> RawResponse[Model Response]
+    RawResponse --> SchemaValidator[Pydantic V2 Schema Gate]
+    SchemaValidator -->|Valid| SafeOutput[Sanitized Response]
+    SchemaValidator -->|Invalid| Fallback[Safe Refusal Handler]
 ```
 
 ### Component Flow
@@ -238,14 +237,14 @@ graph TD
 
 ### Architecture
 ```mermaid
-graph TD
-    ClientApp["Client Application"] -->|API Request| Gateway["FastAPI Gateway"]
-    Gateway --> Auth["OAuth2 / JWT Claims Validator"]
-    Auth --> CircuitBreaker["Circuit Breaker & Rate Limiter"]
-    CircuitBreaker --> CRM["Salesforce Adapter"]
-    CircuitBreaker --> ITSM["ServiceNow Adapter"]
-    CircuitBreaker --> Slack["Slack API Adapter"]
-    CRM --> Normalizer["Unified Response Normalizer"]
+flowchart TD
+    ClientApp[Client Application] --> Gateway[FastAPI Gateway]
+    Gateway --> Auth[OAuth2 / JWT Validator]
+    Auth --> CircuitBreaker[Circuit Breaker & Rate Limiter]
+    CircuitBreaker --> CRM[Salesforce Adapter]
+    CircuitBreaker --> ITSM[ServiceNow Adapter]
+    CircuitBreaker --> Slack[Slack API Adapter]
+    CRM --> Normalizer[Unified Response Normalizer]
     ITSM --> Normalizer
     Slack --> Normalizer
     Normalizer --> ClientApp
@@ -265,12 +264,12 @@ graph TD
 
 ### Architecture
 ```mermaid
-graph LR
-    InputData["Candidate Profile"] --> BiasEngine["Fairness & Bias Detector"]
-    BiasEngine --> ModelInference["Decision Model"]
-    ModelInference --> Prediction["Model Decision"]
-    ModelInference --> SHAP["SHAP Feature Explainer"]
-    SHAP --> AuditTrail["Immutable Compliance Audit Log"]
+flowchart LR
+    InputData[Candidate Profile] --> BiasEngine[Fairness & Bias Detector]
+    BiasEngine --> ModelInference[Decision Model]
+    ModelInference --> Prediction[Model Decision]
+    ModelInference --> SHAP[SHAP Feature Explainer]
+    SHAP --> AuditTrail[Immutable Compliance Audit Log]
     Prediction --> AuditTrail
 ```
 
@@ -287,13 +286,13 @@ graph LR
 
 ### Architecture
 ```mermaid
-graph TD
-    GoldenDataset["Golden Q&A Benchmark Dataset"] --> Evaluator["RAGAS Evaluation Engine"]
-    RAGSystem["Production RAG Pipeline"] -->|Actual Responses| Evaluator
-    Evaluator --> Metrics["Faithfulness & Relevance Scorer"]
-    Metrics --> ThresholdGate{"Quality Gate (Score >= 0.85)"}
-    ThresholdGate -->|Passed| ReleaseReport["Release Approval Dashboard"]
-    ThresholdGate -->|Failed| Alert["Regression Alert & Block PR"]
+flowchart TD
+    GoldenDataset[Golden Benchmark Dataset] --> Evaluator[RAGAS Evaluation Engine]
+    RAGSystem[Production RAG Pipeline] --> Evaluator
+    Evaluator --> Metrics[Faithfulness & Relevance Scorer]
+    Metrics --> ThresholdGate{Quality Gate Score >= 0.85}
+    ThresholdGate -->|Passed| ReleaseReport[Release Approval Dashboard]
+    ThresholdGate -->|Failed| Alert[Regression Alert]
 ```
 
 ### Component Flow
@@ -309,15 +308,15 @@ graph TD
 
 ### Architecture
 ```mermaid
-graph TD
-    InboundQuery["User Query"] --> Cache{"Tier-1: Redis Semantic Cache"}
-    Cache -->|Cache Hit (>0.92 Sim)| ReturnCached["Return Cached Response (<15ms, $0)"]
-    Cache -->|Cache Miss| Router{"Tier-2: Cascading Model Router"}
-    Router -->|Simple Query| SmallModel["Gemini 1.5 Flash / GPT-4o-mini"]
-    Router -->|Complex Query| LargeModel["Claude 3.5 Sonnet / GPT-4o"]
-    SmallModel --> Tracker["Cost Tracker & Cache Updater"]
+flowchart TD
+    InboundQuery[User Query] --> Cache{Tier-1: Redis Semantic Cache}
+    Cache -->|Hit| ReturnCached[Return Cached Response - 15ms]
+    Cache -->|Miss| Router{Tier-2: Cascading Model Router}
+    Router -->|Simple| SmallModel[Gemini 1.5 Flash / GPT-4o-mini]
+    Router -->|Complex| LargeModel[Claude 3.5 Sonnet / GPT-4o]
+    SmallModel --> Tracker[Cost Tracker & Cache Updater]
     LargeModel --> Tracker
-    Tracker --> UserResponse["Client Response"]
+    Tracker --> UserResponse[Client Response]
 ```
 
 ### Component Flow
@@ -334,13 +333,13 @@ graph TD
 
 ### Architecture
 ```mermaid
-graph TD
-    Prompt["Inbound Prompt"] --> Scorer["Complexity & Code Heuristic Scorer"]
-    Scorer --> Matcher["Registry Policy Matcher"]
-    Matcher --> Registry["Foundation Model Registry"]
-    Registry --> ExecutionEngine["LLM Execution Engine"]
-    ExecutionEngine --> DecisionLogger["Routing Decision Telemetry"]
-    DecisionLogger --> OutputResponse["Client Output"]
+flowchart TD
+    Prompt[Inbound Prompt] --> Scorer[Complexity Scorer]
+    Scorer --> Matcher[Registry Policy Matcher]
+    Matcher --> Registry[Foundation Model Registry]
+    Registry --> ExecutionEngine[LLM Execution Engine]
+    ExecutionEngine --> DecisionLogger[Routing Decision Telemetry]
+    DecisionLogger --> OutputResponse[Client Output]
 ```
 
 ### Component Flow
@@ -356,14 +355,14 @@ graph TD
 
 ### Architecture
 ```mermaid
-graph TD
-    AgentProposal["Agent Action Proposal"] --> RiskEngine{"Risk Threshold Policy"}
-    RiskEngine -->|Low Risk (Auto)| ExecutionNode["Execute Production Mutation"]
-    RiskEngine -->|High Risk (Escalate)| EscalationQueue["Manager Approval Queue"]
-    EscalationQueue --> HumanReviewer["Human Approver / Manager"]
+flowchart TD
+    AgentProposal[Agent Action Proposal] --> RiskEngine{Risk Threshold Policy}
+    RiskEngine -->|Low Risk| ExecutionNode[Execute Production Mutation]
+    RiskEngine -->|High Risk| EscalationQueue[Manager Approval Queue]
+    EscalationQueue --> HumanReviewer[Human Approver / Manager]
     HumanReviewer -->|Approved| ExecutionNode
-    HumanReviewer -->|Rejected| AbortNode["Abort Action & Log Audit Trail"]
-    ExecutionNode --> Receipt["Transaction Confirmation Receipt"]
+    HumanReviewer -->|Rejected| AbortNode[Abort Action & Audit Log]
+    ExecutionNode --> Receipt[Transaction Receipt]
 ```
 
 ### Component Flow
@@ -380,14 +379,14 @@ graph TD
 
 ### Architecture
 ```mermaid
-graph LR
-    SourceDocs["Raw Unstructured Text"] --> Extractor["Entity-Relation Triple Extractor"]
-    Extractor --> GraphStore["NetworkX / Neo4j Graph DB"]
-    UserQuestion["User Question"] --> QuerySubGraph["2-Hop Subgraph Traversal"]
+flowchart LR
+    SourceDocs[Raw Unstructured Text] --> Extractor[Entity-Relation Extractor]
+    Extractor --> GraphStore[NetworkX / Neo4j Graph DB]
+    UserQuestion[User Question] --> QuerySubGraph[2-Hop Subgraph Traversal]
     GraphStore --> QuerySubGraph
-    QuerySubGraph --> ContextPrompt["Augmented Structural Context"]
-    ContextPrompt --> LLMReasoning["LLM Multi-Hop Reasoning"]
-    LLMReasoning --> GroundedAnswer["Structured Graph-Grounded Answer"]
+    QuerySubGraph --> ContextPrompt[Augmented Structural Context]
+    ContextPrompt --> LLMReasoning[LLM Multi-Hop Reasoning]
+    LLMReasoning --> GroundedAnswer[Structured Graph-Grounded Answer]
 ```
 
 ### Component Flow
@@ -403,12 +402,12 @@ graph LR
 
 ### Architecture
 ```mermaid
-graph TD
-    OrderService["Order Ingestion Service"] -->|1. Publish Event| EventBus["Kafka Message Bus"]
-    EventBus -->|2. Route to Topic| AgentConsumer["Worker Agent Consumer"]
-    AgentConsumer -->|3. Async Processing| BusinessLogic["Autonomous Business Logic"]
-    BusinessLogic -->|4. Emit Status| EventBus
-    EventBus -->|5. Update CRM| DownstreamService["Downstream Notification Service"]
+flowchart TD
+    OrderService[Order Ingestion Service] --> EventBus[Kafka Message Bus]
+    EventBus --> AgentConsumer[Worker Agent Consumer]
+    AgentConsumer --> BusinessLogic[Autonomous Business Logic]
+    BusinessLogic --> EventBus
+    EventBus --> DownstreamService[Downstream Notification Service]
 ```
 
 ### Component Flow
@@ -424,13 +423,13 @@ graph TD
 
 ### Architecture
 ```mermaid
-graph TD
-    AgentApp["Agent Execution Engine"] --> Logger["JSON Structured Logger"]
-    AgentApp --> Tracer["OpenTelemetry / Langfuse Tracer"]
-    AgentApp --> Metrics["Prometheus Telemetry Client"]
-    Logger --> LogAggregator["CloudWatch / Elastic Log Aggregator"]
-    Tracer --> LangfuseUI["Langfuse Distributed Tracing UI"]
-    Metrics --> Grafana["Grafana Real-Time SLO Dashboard"]
+flowchart TD
+    AgentApp[Agent Execution Engine] --> Logger[JSON Structured Logger]
+    AgentApp --> Tracer[OpenTelemetry / Langfuse Tracer]
+    AgentApp --> Metrics[Prometheus Telemetry Client]
+    Logger --> LogAggregator[CloudWatch / Elastic Aggregator]
+    Tracer --> LangfuseUI[Langfuse Distributed Tracing UI]
+    Metrics --> Grafana[Grafana Real-Time SLO Dashboard]
 ```
 
 ### Component Flow
@@ -446,14 +445,14 @@ graph TD
 
 ### Architecture
 ```mermaid
-graph TD
-    DevCommit["Developer Git Push"] --> Pipeline["GitHub Actions CI/CD"]
-    Pipeline --> DockerBuild["Build & Cosign Docker Image"]
-    Pipeline --> Terraform["Terraform Cloud Provisioning"]
-    Terraform --> EKSCluster["AWS EKS Kubernetes Cluster"]
-    EKSCluster --> AgentPods["Horizontal Pod Autoscaler (HPA)"]
-    AgentPods --> LoadBalancer["AWS ALB Ingress Controller"]
-    LoadBalancer --> EndUsers["External Consumer Traffic"]
+flowchart TD
+    DevCommit[Developer Git Push] --> Pipeline[GitHub Actions CI/CD]
+    Pipeline --> DockerBuild[Build & Cosign Docker Image]
+    Pipeline --> Terraform[Terraform Cloud Provisioning]
+    Terraform --> EKSCluster[AWS EKS Kubernetes Cluster]
+    EKSCluster --> AgentPods[Horizontal Pod Autoscaler HPA]
+    AgentPods --> LoadBalancer[AWS ALB Ingress Controller]
+    LoadBalancer --> EndUsers[External Consumer Traffic]
 ```
 
 ### Component Flow
