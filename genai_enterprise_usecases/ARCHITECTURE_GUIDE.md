@@ -10,9 +10,9 @@ This document details the architecture, component flow, and technical implementa
 ### Architecture
 ```mermaid
 graph TD
-    Client[AI Agent / Client] -->|JSON-RPC Request| API[FastAPI Server]
+    Client["AI Agent / Client"] -->|JSON-RPC Request| API[FastAPI Server]
     API -->|Route Handler| Manager[MCP Manager]
-    Manager -->|Query| DB[(SQLite Database)]
+    Manager -->|Query| DB["(SQLite Database)"]
     DB -->|Result| Manager
     Manager -->|JSON-RPC Response| Client
 ```
@@ -65,7 +65,7 @@ graph LR
     Classifier --> State[Shared State]
     Extractor --> State
     State -->|Update| Router
-    Router -->|Done| End
+    Router -->|Done| EndNode["End"]
 ```
 
 ### Component Flow
@@ -82,9 +82,9 @@ graph LR
 ### Architecture
 ```mermaid
 graph TD
-    Docs[PDFs/Text] -->|Ingest| Splitter[Text Splitter]
+    Docs["PDFs/Text"] -->|Ingest| Splitter[Text Splitter]
     Splitter -->|Embed| Model[Embedding Model]
-    Model -->|Upsert| VectorDB[(Chroma/Qdrant)]
+    Model -->|Upsert| VectorDB["(Chroma/Qdrant)"]
     
     User -->|Query| Chain[RAG Chain]
     Chain -->|Search| VectorDB
@@ -171,7 +171,7 @@ graph TD
 ```mermaid
 graph TD
     Data --> Embedder[Embedding Service]
-    Embedder -->|Vectors| Qdrant[(Qdrant Cluster)]
+    Embedder -->|Vectors| Qdrant["(Qdrant Cluster)"]
     Qdrant -->|HNSW Index| Storage
     Query -->|Search| Qdrant
     Qdrant -->|ANN| Results
@@ -190,11 +190,12 @@ graph TD
 ### Architecture
 ```mermaid
 graph TD
-    Query --> Dense[Vector Search (Semantic)]
-    Query --> Sparse[BM25 Search (Keyword)]
+    Query --> Dense["Vector Search (Semantic)"]
+    Query --> Sparse["BM25 Search (Keyword)"]
     Dense --> Results1
     Sparse --> Results2
-    Results1 & Results2 --> Fusion[Reciprocal Rank Fusion]
+    Results1 --> Fusion[Reciprocal Rank Fusion]
+    Results2 --> Fusion[Reciprocal Rank Fusion]
     Fusion --> Final[Ranked List]
 ```
 
@@ -242,7 +243,9 @@ graph TD
     Service -->|Retries| CRM[Salesforce Mock]
     Service -->|Retries| ITSM[ServiceNow Mock]
     Service -->|Retries| Chat[Slack Mock]
-    CRM & ITSM & Chat -->|Response| Gateway
+    CRM --> |Response| Gateway
+    ITSM --> |Response| Gateway
+    Chat --> |Response| Gateway
     Gateway -->|Unified JSON| Client
 ```
 
@@ -308,9 +311,10 @@ graph TD
     UserQuery --> Cache{Semantic Cache}
     Cache -->|Hit| Return[Cached Response]
     Cache -->|Miss| Router{Model Router}
-    Router -->|Simple| GPT3[GPT-3.5]
+    Router -->|Simple| GPT3["GPT-3.5"]
     Router -->|Complex| GPT4[GPT-4]
-    GPT3 & GPT4 -->|Response| Tracker[Cost Tracker]
+    GPT3 --> |Response| Tracker[Cost Tracker]
+    GPT4 --> |Response| Tracker[Cost Tracker]
     Tracker -->|Update| Cache
     Tracker --> User
 ```
@@ -377,7 +381,7 @@ graph TD
 ```mermaid
 graph LR
     Text --> Extractor[Entity Extractor]
-    Extractor -->|Triples| GraphDB[(NetworkX/Neo4j)]
+    Extractor -->|Triples| GraphDB["(NetworkX/Neo4j)"]
     Query -->|Entities| GraphDB
     GraphDB -->|Neighbors| Context
     Context -->|Augment| LLM
@@ -398,7 +402,7 @@ graph LR
 ### Architecture
 ```mermaid
 graph TD
-    Source[Order Service] -->|Publish| Bus[Message Bus (Kafka)]
+    Source[Order Service] -->|Publish| Bus["Message Bus (Kafka)"]
     Bus -->|Subscribe| Consumer[Agent Consumer]
     Consumer -->|Process| Logic[Business Logic]
     Logic -->|Publish| Bus
@@ -422,8 +426,8 @@ graph TD
     Agent -->|Log Request| Logger[JSON Logger]
     Agent -->|Measure Latency| Metrics[Prometheus Client]
     Agent -->|Trace Span| Tracer[OpenTelemetry]
-    Metrics -->|Scrape| dashboard[Grafana/Prometheus]
-    Tracer -->|Export| Console/Jaeger
+    Metrics -->|Scrape| dashboard["Grafana/Prometheus"]
+    Tracer -->|Export| Jaeger["Console / Jaeger"]
 ```
 
 ### Component Flow
@@ -440,10 +444,10 @@ graph TD
 ### Architecture
 ```mermaid
 graph TD
-    Dev -->|Push| Loop[CI/CD]
+    Dev -->|Push| Loop["CI/CD"]
     Loop -->|Build| Docker[Docker Image]
     Loop -->|Terraform| Infra[AWS EKS]
-    Loop -->|Helm/Manifests| K8s[Kubernetes Cluster]
+    Loop -->|Helm / Manifests| K8s[Kubernetes Cluster]
     K8s -->|Pod| Container[Agent Container]
     Container -->|Service| LoadBalancer
 ```
