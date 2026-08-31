@@ -2,106 +2,103 @@
 
 <div align="center">
 
+# Sri Cherukuri
+### **Principal GenAI Architect | Forward Deployment Lead (FDE) | Staff AI Engineer**
+📍 Frisco, TX • 📧 [sri.cheru@gmail.com](mailto:sri.cheru@gmail.com) • 📱 469-573-4656  
+🔗 [LinkedIn Profile](https://linkedin.com/in/sri-cherukuri-genai-architect) • 💻 [GitHub Portfolio](https://github.com/sricheru/agentic-ai-portfolio) • 🎖️ [Google Skills (27 Certs)](https://skills.google/public_profiles/72d3c0e5-1a82-48d6-943f-0df7395e4263)
+
 [![Patent](https://img.shields.io/badge/US_Patent-%237756878-gold?style=for-the-badge&logo=shield)](https://patents.google.com/patent/US7756878B2/en)
 [![Scale](https://img.shields.io/badge/Enterprise_Scale-AT%26T_(20M%2B)_%7C_Charter_(10M%2B)-blue?style=for-the-badge&logo=tower)](https://github.com/sricheru)
 [![Orchestration](https://img.shields.io/badge/Agentic_AI-LangGraph_StateGraph-green?style=for-the-badge&logo=python)](./01_agentic_patterns/)
 [![Security](https://img.shields.io/badge/Zero--Trust_RAG-Entra_ID_RBAC-purple?style=for-the-badge&logo=microsoft)](./02_vector_retrieval_rbac/)
 [![Interoperability](https://img.shields.io/badge/Standard-MCP_Tool_Gateway-black?style=for-the-badge&logo=anthropic)](./03_mcp_gateway/)
-[![Cost Governance](https://img.shields.io/badge/Optimization-Two--Tier_Redis_Caching-red?style=for-the-badge&logo=redis)](./04_cost_and_governance/)
-
-**Architected by Sri Cherukuri**  
-*Principal GenAI Architect | Forward Deployment Lead | Staff AI Solutions Engineer*  
-*United States Patent Holder (**US Patent #7756878** - System and Method for Enterprise Processing)*
+[![Cost Governance](https://img.shields.io/badge/Optimization-40--60%25_Cost_Reduction-red?style=for-the-badge&logo=redis)](./04_cost_and_governance/)
 
 </div>
 
 ---
 
-## 👤 Executive Architecture Profile
+## 👤 Executive Summary & Career Progression
 
-Enterprise systems architect with **15+ years of Tier-1 production engineering** leading high-concurrency, mission-critical platforms at **AT&T** (20M+ subscribers) and **Charter Communications** (10M+ subscribers). Deeply specialized in designing, deploying, and governing **applied Generative AI systems, stateful multi-agent state graphs, zero-trust vector retrieval architectures, and centralized MCP tool gateways**.
+**Principal GenAI Architect** with **15+ years of Tier-1 enterprise technology leadership**, dedicated 100% to applied Large Language Model (LLM) systems, autonomous multi-agent orchestration, and production-grade Generative AI since 2023. Architect of **21+ enterprise-grade GenAI applications** and **14 multi-agent design patterns** delivering **99.9% availability design**, **85%+ test coverage**, and **40-60% cost optimization** in production.
 
-```
-                           ┌────────────────────────────────────────────────────────┐
-                           │               ENTERPRISE GENAI GOVERNANCE              │
-                           │   OWASP LLM Top 10 • Entra ID RBAC • OpenTelemetry     │
-                           └───────────────────────────┬────────────────────────────┘
-                                                       │
-         ┌─────────────────────────────────────────────┼─────────────────────────────────────────────┐
-         │                                             │                                             │
-┌────────▼──────────────┐                   ┌──────────▼───────────┐                   ┌─────────────▼─────────┐
-│ MULTI-AGENT STATEGRAPH│                   │  IDENTITY-AWARE RAG  │                   │  CENTRAL MCP GATEWAY  │
-│ • LangGraph Channels  │                   │ • Dense/Sparse RRF   │                   │ • JSON-RPC 2.0 Spec   │
-│ • Point-in-Time Check │                   │ • Entra ID Claims    │                   │ • Circuit Breakers    │
-│ • Human-in-the-Loop   │                   │ • Zero-Leakage ACLs  │                   │ • Role-Based Dispatch │
-└───────────────────────┘                   └──────────────────────┘                   └───────────────────────┘
-```
+* **Career Trajectory:** Senior Analyst → Lead Developer → Architect (2008–2022) → Principal Technical Architect II (2022–2023) → **Principal GenAI Architect / Forward Deployment Lead (2023–Present)**.
+* **Tier-1 Telecom Pedigree:** 
+  * **Charter Communications (Principal Architect II, 2022–2023):** Architected core microservices serving **10M+ subscribers**; reduced system latency by **40%** through distributed systems optimization; established unified mobility framework.
+  * **AT&T (Technical Architect, 2008–2022):** Built **AIOps platform** with ML-based anomaly detection/remediation, reducing incident detection time by **70%**; architected mission-critical enterprise platforms serving **20M+ subscribers** at **99.9% uptime**.
+* **Production Discipline:** Applying 15+ years of distributed systems resilience, fault-tolerance, and security engineering exclusively to Agentic AI and Forward Deployment AI systems.
 
 ---
 
-## 📜 Intellectual Property Spotlight: US Patent #7756878
+## 📜 Intellectual Property: US Patent #7756878
 
 * **Title:** *System and Method for Enterprise Processing*
-* **Patent ID:** [US Patent #7756878 B2](https://patents.google.com/patent/US7756878B2/en)
-* **Architectural Translation to Modern GenAI Systems:**
-  The foundational principles established in **US Patent #7756878**—distributed state tracking, deterministic asynchronous message routing, and fault-tolerant transaction processing—directly power modern **Enterprise Multi-Agent StateGraphs and MCP Gateways**:
-  1. **Monotonic State Management:** Decoupling mutable agent execution from persistent state stores (Postgres/Redis Checkpointers).
-  2. **Deterministic Routing Edges:** Replacing unbounded LLM loops with rule-governed state machines and confidence-scored transition gates.
-  3. **Separation of Concerns:** Isolating LLM reasoning engines from backend data stores via zero-trust policy gateways.
+* **Patent Number:** [US Patent #7756878 B2](https://patents.google.com/patent/US7756878B2/en) *(Issued July 13, 2010)*
+* **Modern Architectural Relevance:** The patented principles of asynchronous enterprise transaction processing, stateful message routing, and decoupled event handling form the architectural foundation for:
+  1. **LangGraph StateGraph Persistence:** Monotonic state channels with point-in-time PostgreSQL/Redis checkpointing.
+  2. **Centralized MCP Tool Gateways:** Role-governed, circuit-broken JSON-RPC 2.0 tool dispatching.
+  3. **Identity-Aware RBAC Vector Retrieval:** Zero-trust document chunk isolation at the vector database layer.
 
 ---
 
-## 📚 Master 25+ Enterprise Reference Architecture Catalog
+## 🚀 Flagship Products & Applied AI Deployments
 
-This repository indexes **25+ production-grade reference architectures and design patterns**, organized into 4 core architectural domains:
-
-### 🧩 Domain 1: Multi-Agent Orchestration & Stateful Workflows
-| Reference Architecture | Architectural Pattern | Primary Technologies | Reference Spec |
-| :--- | :--- | :--- | :--- |
-| **01. Stateful StateGraph** | Multi-Agent Supervisor with Point-in-Time Checkpointing | LangGraph, PostgreSQL, Redis | [`01_agentic_patterns/`](./01_agentic_patterns/) |
-| **02. Autonomous ReAct Agent** | Dynamic Tool-Calling & Observation Reasoning Loop | Pydantic, Python 3.12 | [`genai_design_patterns/2_tool_use_research_assistant/`](./genai_design_patterns/) |
-| **03. Hierarchical Project Planner** | Multi-Stage Goal Decomposition & Dependency Graph | LangGraph, Directed Acyclic Graph (DAG) | [`genai_design_patterns/planning_project_manager/`](./genai_design_patterns/) |
-| **04. Multi-Agent Studio** | Collaborative Agent Team with Shared Memory & Critique | LangGraph, Redis Pub/Sub | [`genai_design_patterns/multiagent_content_studio/`](./genai_design_patterns/) |
-| **05. Dual-Agent Reflection** | Actor-Critic Self-Correction & Syntax Validation Loop | Pydantic V2, Python 3.12 | [`genai_design_patterns/reflection_code_reviewer/`](./genai_design_patterns/) |
-| **06. Sequential Ingestion Pipeline**| Multi-stage ETL with Schema Validation & Dead Letter Queue | FastAPI, Pydantic, Pytest | [`genai_design_patterns/sequential_data_pipeline/`](./genai_design_patterns/) |
-| **07. Human-in-the-Loop (HITL) Gate**| Cryptographic Pause/Resume Approval for High-Risk Actions | FastAPI, JWT, Redis Streams | [`genai_design_patterns/hitl_medical_diagnosis/`](./genai_design_patterns/) |
-
-### 🛡️ Domain 2: Enterprise Retrieval & Vector Engineering (Identity-Aware RBAC)
-| Reference Architecture | Architectural Pattern | Primary Technologies | Reference Spec |
-| :--- | :--- | :--- | :--- |
-| **08. Identity-Aware RBAC RAG** | Microsoft Entra ID Token Claim Pre-filtering at Vector Layer | Entra ID, Qdrant, Chroma | [`02_vector_retrieval_rbac/`](./02_vector_retrieval_rbac/) |
-| **09. Hybrid Dense + Sparse Search**| Reciprocal Rank Fusion ($k=60$) combining BM25 & Embeddings | Qdrant, BM25, Text Embeddings | [`genai_enterprise_usecases/9_hybrid_search/`](./genai_enterprise_usecases/) |
-| **10. Enterprise Vector DB Engine** | HNSW Hierarchical Graph Indexing & Payload Filtering | Qdrant, Pinecone, pgvector | [`genai_enterprise_usecases/8_vector_db/`](./genai_enterprise_usecases/) |
-| **11. Production GraphRAG** | Knowledge Graph Triples & 2-Hop Semantic Traversal | NetworkX, Neo4j, LangChain | [`genai_enterprise_usecases/17_knowledge_graph/`](./genai_enterprise_usecases/) |
-| **12. Production Document Ingestion**| Context-Aware Chunking, Metadata Enrichment & Deduplication | PyPDF, Unstructured, Pydantic | [`genai_enterprise_usecases/4_production_rag/`](./genai_enterprise_usecases/) |
-
-### 🔌 Domain 3: Standardized Tooling & Interoperability (MCP Gateway)
-| Reference Architecture | Architectural Pattern | Primary Technologies | Reference Spec |
-| :--- | :--- | :--- | :--- |
-| **13. Centralized MCP Gateway** | JSON-RPC 2.0 Server with Fine-Grained Role Permissions | Model Context Protocol, FastAPI | [`03_mcp_gateway/`](./03_mcp_gateway/) |
-| **14. Agent-to-Agent Message Bus** | Distributed Event-Driven Broker for Asynchronous Agents | Redis Pub/Sub, Kafka | [`genai_enterprise_usecases/2_agent2agent/`](./genai_enterprise_usecases/) |
-| **15. Enterprise Legacy Adapters** | Resilient Circuit-Breaker Adapter for CRM/ITSM/ERP Systems | FastAPI, Tenacity, Pydantic | [`genai_enterprise_usecases/11_enterprise_api/`](./genai_enterprise_usecases/) |
-| **16. Event-Driven Reactive Agent** | Stream Processing & Non-blocking Reactive Consumers | Redis Streams, AsyncIO | [`genai_enterprise_usecases/18_event_driven/`](./genai_enterprise_usecases/) |
-
-### 💰 Domain 4: Cost Governance, LLMOps & Production Resilience
-| Reference Architecture | Architectural Pattern | Primary Technologies | Reference Spec |
-| :--- | :--- | :--- | :--- |
-| **17. Two-Tier Semantic Caching** | Sub-millisecond Hash + Cosine ($\ge 0.92$) Vector Cache | Redis Vector, OpenAI Embeddings | [`04_cost_and_governance/`](./04_cost_and_governance/) |
-| **18. Dynamic Model Router** | Complexity-Based Tier-1 (Mini) vs Tier-2 (Sonnet) Routing | Python 3.12, Pydantic | [`04_cost_and_governance/`](./04_cost_and_governance/) |
-| **19. OWASP Top 10 Guardrails** | Prompt Injection & PII Exposure Pre-Flight Defense | Regex, Vector Guardrails | [`genai_enterprise_usecases/10_ai_guardrails/`](./genai_enterprise_usecases/) |
-| **20. Automated RAGAS Eval Suite** | LLM-as-a-Judge Faithfulness & Context Recall CI/CD Gate | RAGAS, Pytest, GitHub Actions | [`genai_enterprise_usecases/13_evaluation_pipeline/`](./genai_enterprise_usecases/) |
-| **21. LLMOps Continuous Delivery**| Automated Model Evaluation & Blue/Green Agent Deployment | GitHub Actions, Docker | [`genai_enterprise_usecases/7_llmops_pipeline/`](./genai_enterprise_usecases/) |
-| **22. OpenTelemetry Observability** | Distributed Tracing, Token Telemetry & P99 Latency Metrics | OpenTelemetry, Prometheus | [`genai_enterprise_usecases/19_observability/`](./genai_enterprise_usecases/) |
-| **23. Responsible AI & Fair Lending**| SHAP Feature Explainability & Disparate Impact Auditing | SHAP, Fairlearn, Scikit-learn | [`genai_enterprise_usecases/12_responsible_ai/`](./genai_enterprise_usecases/) |
-| **24. Cloud-Native EKS Deployment**| Terraform IaC, Helm Charts & Horizontal Pod Autoscaling (HPA) | AWS EKS, Terraform, Kubernetes | [`genai_enterprise_usecases/20_cloud_deployment/`](./genai_enterprise_usecases/) |
-| **25. Universal Enterprise Framework**| Unified Plug-and-Play Architecture for Enterprise Copilots | FastAPI, LangGraph, Qdrant | [`genai_enterprise_usecases/21_Universal_Framework/`](./genai_enterprise_usecases/) |
+| Product / Platform | Architecture & Stack | Scale & Measured Impact |
+| :--- | :--- | :--- |
+| **TechLeader-ID** | Multimodal AI (Gemini 1.5 Flash), Clean Architecture, Pydantic V2 | **<150–250ms P95 latency** for real-time executive identification & entity resolution |
+| **Aura CRM** | Full-Stack AI SaaS (React 18 + TypeScript + FastAPI + Supabase + Stripe) | **Row Level Security (RLS)**, handles **10k+ concurrent mock requests** with multi-tenant isolation |
+| **HomeScribe-AI** | Production Real Estate Content Generation API (FastAPI + Pydantic Clean Arch) | High-throughput batch generation with zero-drift schema compliance and automated SEO enrichment |
+| **N8N AI Automation Hub**| 10+ Production Autonomous Workflows (Salesforce, HubSpot, Slack, Jira) | **5,000+ events/month**, achieving **70–80% faster operational processing** over manual workflows |
 
 ---
 
-## 🏛️ Flagship System Design Blueprints
+## 🧩 Multi-Agent Orchestration Catalog (7 Patterns × 2 Variants = 14 Projects)
 
-### Blueprint 1: Stateful Multi-Agent StateGraph with Resilient Persistence
+All multi-agent patterns feature deterministic state transitions, cycle protection, and zero state loss under failure:
 
+| Agentic Pattern | Base Reference Project | Advanced Enterprise Variant | Key Technical Innovation | Reference Blueprint |
+| :--- | :--- | :--- | :--- | :--- |
+| **1. Reflection** | AI Code Review Assistant | Multi-Language Security Reviewer | Actor-Critic dual-agent loop with AST parsing | [`01_agentic_patterns/`](./01_agentic_patterns/) |
+| **2. Tool Use** | Market Research Agent | Competitive Intelligence Engine | Model Context Protocol (MCP) tool integration | [`03_mcp_gateway/`](./03_mcp_gateway/) |
+| **3. Planning** | Content Strategy Planner | Campaign Multi-Agent Orchestrator | Hierarchical DAG task decomposition & dynamic replan | [`01_agentic_patterns/`](./01_agentic_patterns/) |
+| **4. ReAct** | Financial Analysis Agent | Investment Portfolio Analyzer | Structured Thought-Action-Observation loop with SEC data | [`01_agentic_patterns/`](./01_agentic_patterns/) |
+| **5. Multi-Agent** | Content Studio (4 Agents) | Investor Pitch Deck Generator | **4x faster output, 92% quality score**, shared state | [`01_agentic_patterns/`](./01_agentic_patterns/) |
+| **6. Sequential** | Document Processing Pipeline | Legal Contract Analyzer | Multi-stage schema validation with Dead Letter Queue | [`01_agentic_patterns/`](./01_agentic_patterns/) |
+| **7. HITL Gate** | Medical Diagnosis Aid | Mortgage Loan Approver | **100 interrupt-resume cycles with 0 state loss** | [`01_agentic_patterns/`](./01_agentic_patterns/) |
+
+---
+
+## 🏛️ Enterprise GenAI Architecture Roadmap (21 Production Modules)
+
+```
+┌──────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                                 21 ENTERPRISE GENAI MODULES                                      │
+├──────────────────────────────┬──────────────────────────────┬────────────────────────────────────┤
+│ 01. Model Context Protocol   │ 08. Vector Database Engine   │ 15. Dynamic Model Routing          │
+│ 02. Agent-to-Agent Bus (A2A) │ 09. Hybrid Search (RRF)      │ 16. Human-in-the-Loop (HITL)       │
+│ 03. LangGraph Orchestrator   │ 10. AI Guardrails (PII/Eval) │ 17. GraphRAG Knowledge Graph       │
+│ 04. Production RAG Pipeline  │ 11. Enterprise API Gateway   │ 18. Event-Driven Reactive Agents   │
+│ 05. Autonomous ReAct Agent   │ 12. Responsible AI (SHAP)    │ 19. OpenTelemetry Observability    │
+│ 06. Prompt Engineering Lab   │ 13. RAGAS Evaluation Gate    │ 20. Cloud Deployment (AWS EKS IaC) │
+│ 07. LLMOps CI/CD Pipeline    │ 14. Cost Optimization Caching│ 21. Universal Copilot Framework    │
+└──────────────────────────────┴──────────────────────────────┴────────────────────────────────────┘
+```
+
+---
+
+## 🛡️ LLMOps, Cost Governance & Zero-Trust Standards
+
+* **40–60% Cost Reduction:** Two-Tier Redis Semantic Caching ($\ge 0.92$ cosine similarity threshold, 38% cache hit rate) combined with dynamic model routing (Tier-1: `gpt-4o-mini` / Gemini Flash vs Tier-2/3: `gpt-4o` / Sonnet / o1).
+* **RAGAS CI/CD Quality Gate:** Automated quality evaluation gate requiring Faithfulness $\ge 0.85$ and Answer Relevance $\ge 0.85$ before merging code.
+* **6-Stage LLMOps Pipeline:** GitHub Actions automation featuring linting, security scanning (Bandit, CodeQL, Gitleaks), 85%+ test coverage gates, RAGAS quality checks, Cosign image signing, and canary deployment to AWS EKS.
+* **99.9% Uptime Infrastructure:** AWS EKS with Horizontal Pod Autoscaling (0–50 pods), circuit breakers, and Prometheus-triggered Helm rollbacks on `error_rate > 1%`.
+* **Zero-Trust AI Guardrails:** spaCy NER PII masking + LLM-as-a-Judge hallucination checking (caught 23% of ambiguous responses) + Pydantic V2 schema enforcement.
+
+---
+
+## 📐 Flagship System Design Sequence Blueprints
+
+### 1. Stateful Multi-Agent StateGraph with Checkpointing & HITL
 ```mermaid
 sequenceDiagram
     autonumber
@@ -113,10 +110,10 @@ sequenceDiagram
     participant Store as Redis/Postgres Checkpointer
 
     User->>Supervisor: Goal / Instruction Payload
-    Supervisor->>Store: Save Checkpoint (Initial State)
+    Supervisor->>Store: Save Initial Checkpoint
     Supervisor->>Planner: Request Decomposed Plan
     Planner-->>Supervisor: Return ExecutionPlan (Steps 1..N)
-    Supervisor->>Store: Save Checkpoint (Plan State)
+    Supervisor->>Store: Save Plan Checkpoint
 
     loop For each TaskStep in ExecutionPlan
         Supervisor->>Worker: Dispatch Step Task
@@ -124,59 +121,57 @@ sequenceDiagram
         Worker-->>Supervisor: Return StateDelta (Updates)
         Supervisor->>Store: Save Node Checkpoint
 
-        opt High-Risk Action Detected (e.g. Infrastructure Change)
+        opt High-Risk Action Detected (e.g. Infrastructure / Financial Mutation)
             Worker->>Supervisor: Request Approval Flag
-            Supervisor->>HITL: Suspend Graph (Generate Approval Token)
-            Supervisor->>User: Request Operator Approval
+            Supervisor->>HITL: Suspend Graph (Generate Cryptographic Approval Token)
+            Supervisor->>User: Request Operator Approval Signature
             User->>HITL: Authorize Action
-            HITL->>Supervisor: Resume Graph Execution
+            HITL->>Supervisor: Resume Graph Execution from Exact Checkpoint
         end
     end
 
-    Supervisor->>Supervisor: Synthesize Final Enterprise Response
+    Supervisor->>Supervisor: Synthesize Final Enterprise Output
     Supervisor->>Store: Save Final Checkpoint
-    Supervisor-->>User: Verified Enterprise Response + Trace Audit
+    Supervisor-->>User: Verified Response + Full Execution Trace
 ```
 
 ---
 
-### Blueprint 2: Zero-Trust Identity-Aware Entra ID RBAC Vector Retrieval
-
+### 2. Zero-Trust Identity-Aware Entra ID RBAC Vector Retrieval
 ```mermaid
 sequenceDiagram
     autonumber
     actor User as Enterprise Client
-    participant App as API Gateway
-    participant Entra as Microsoft Entra ID
+    participant App as FastAPI Gateway
+    participant Entra as Microsoft Entra ID (OAuth2)
     participant Filter as Vector RBAC Filter Engine
-    participant VDB as Qdrant Vector DB
+    participant VDB as Qdrant Vector DB (HNSW)
     participant LLM as Enterprise LLM Service
 
-    User->>App: User Query + Bearer JWT
+    User->>App: Query + Bearer JWT Token
     App->>Entra: Validate Token & Extract Claims (Roles, Tenant, Clearance)
     Entra-->>App: UserSecurityContext
     App->>Filter: Construct Database Pre-Filter Payload
     Filter-->>App: Boolean Filter Spec
 
     par Dense Semantic Search
-        App->>VDB: Query Vector + RBAC Filter
+        App->>VDB: Query Vector + RBAC Pre-Filter
         VDB-->>App: Dense Chunks (Cosine Similarity)
     and Sparse BM25 Search
-        App->>VDB: Query Tokens + RBAC Filter
+        App->>VDB: Query Tokens + RBAC Pre-Filter
         VDB-->>App: Sparse Chunks (Keyword Match)
     end
 
-    App->>App: Reciprocal Rank Fusion (RRF k=60)
-    App->>App: Zero-Trust Post-Retrieval Validation
-    App->>LLM: Synthesize Answer (Authorized Context Only)
-    LLM-->>App: Grounded Answer with Citations
+    App->>App: Reciprocal Rank Fusion (RRF k=60) + Cross-Encoder Rerank
+    App->>App: Zero-Trust Post-Retrieval Verification
+    App->>LLM: Synthesize Grounded Response (Authorized Chunks Only)
+    LLM-->>App: Grounded Answer with Source Citations
     App-->>User: Secure Enterprise Response
 ```
 
 ---
 
-### Blueprint 3: Centralized Model Context Protocol (MCP) Tool Gateway
-
+### 3. Centralized Model Context Protocol (MCP) Tool Gateway
 ```mermaid
 sequenceDiagram
     autonumber
@@ -184,22 +179,22 @@ sequenceDiagram
     participant Gateway as Centralized MCP Gateway
     participant Policy as Security Policy Engine
     participant Circuit as Circuit Breaker Manager
-    participant EnterpriseDB as Enterprise CRM / ERP Microservice
+    participant Microservice as Enterprise System (CRM / ERP / DB)
 
     Agent->>Gateway: JSON-RPC "tools/call" (tool_name, arguments)
-    Gateway->>Policy: Validate Caller Role Permissions
+    Gateway->>Policy: Validate Caller Role Permissions & Rate Limits
     alt Unauthorized Role
         Policy-->>Gateway: Access Denied (-32001)
         Gateway-->>Agent: JSON-RPC Security Error
     else Authorized
         Gateway->>Circuit: Evaluate Circuit State (CLOSED / OPEN)
-        alt Circuit OPEN (Failing Dependency)
+        alt Circuit OPEN (Service Degraded)
             Circuit-->>Gateway: Fast-Fail Circuit Rejection (-32002)
-            Gateway-->>Agent: JSON-RPC Error (Service Degraded)
+            Gateway-->>Agent: JSON-RPC Fast-Fail Error
         else Circuit CLOSED (Healthy)
-            Gateway->>EnterpriseDB: Execute Underlying Tool Operation
-            EnterpriseDB-->>Gateway: Database Result
-            Gateway->>Circuit: Log Successful Execution
+            Gateway->>Microservice: Execute Underlying Tool Operation
+            Microservice-->>Gateway: Execution Result Payload
+            Gateway->>Circuit: Log Successful Invocation
             Gateway-->>Agent: JSON-RPC ToolResult Payload
         end
     end
@@ -207,8 +202,7 @@ sequenceDiagram
 
 ---
 
-### Blueprint 4: Two-Tier Semantic Caching & Complexity-Based Model Routing
-
+### 4. Two-Tier Semantic Caching & Dynamic Model Routing
 ```mermaid
 sequenceDiagram
     autonumber
@@ -217,7 +211,7 @@ sequenceDiagram
     participant Cache as Redis Two-Tier Semantic Cache
     participant Router as Complexity-Based Model Router
     participant Tier1 as Tier-1 Model (Sub-second / Low Cost)
-    participant Tier2 as Tier-2/3 Model (Deep Reasoning)
+    participant Tier2 as Tier-2/3 Reasoning Engine (Sonnet / o1)
 
     Client->>Guardrail: Submit Query
     Guardrail->>Guardrail: Check Prompt Injection (LLM01) & PII (LLM06)
@@ -226,17 +220,17 @@ sequenceDiagram
     else Safe Query
         Guardrail->>Cache: Check Cosine Similarity (>= 0.92)
         alt Semantic Cache Hit
-            Cache-->>Client: Cached Response ($0 Cost, <120ms Latency)
+            Cache-->>Client: Cached Response ($0 API Cost, <120ms Latency)
         else Semantic Cache Miss
             Guardrail->>Router: Score Query Complexity (Code, Math, Synthesis)
             alt Low Complexity (< 0.40)
-                Router->>Tier1: Execute on Tier-1 Model
+                Router->>Tier1: Execute on Tier-1 Model (e.g. GPT-4o-mini)
                 Tier1-->>Cache: Store Vector & Response in Cache
                 Tier1-->>Client: Fast Response (<450ms)
             else High Complexity (>= 0.40)
                 Router->>Tier2: Execute on Tier-2/3 Reasoning Engine
                 Tier2-->>Cache: Store Vector & Response in Cache
-                Tier2-->>Client: In-Depth Reasoning Response
+                Tier2-->>Client: Deep Reasoning Response
             end
         end
     end
@@ -250,45 +244,32 @@ sequenceDiagram
 | :--- | :--- | :--- | :--- |
 | **P95 Latency (Cached)** | 1,850 ms (full LLM round-trip) | **118 ms** (Redis Semantic Cache Hit) | ⚡ **93.6% Latency Reduction** |
 | **Blended Cost / 1M Tokens** | $12.50 (all queries to GPT-4) | **$2.10** (Two-Tier Cache + Model Routing) | 💰 **83.2% Cost Reduction** |
-| **Retrieval Precision (MRR@5)** | 0.61 (Dense-only unranked) | **0.89** (Hybrid RRF Dense + Sparse) | 🎯 **+45.9% Retrieval Quality** |
+| **Retrieval Relevance (F1)** | 0.61 (Dense-only unranked) | **0.86** (Hybrid RRF + Cross-Encoder) | 🎯 **+40.9% Relevance Gain** |
 | **Unauthorized ACL Leakage** | 3.8% (OWASP LLM06 Risk) | **0.00%** (Entra ID RBAC Pre-Filtering) | 🔒 **100% Zero-Trust Isolation** |
 | **Agent Fault Recovery (MTTR)**| 100% loss on container crash | **<50 ms** (Point-in-Time Checkpointer) | 🛡️ **Zero Execution Loss** |
+| **Release Velocity** | 4 hours (Manual QA) | **45 minutes** (6-Stage LLMOps Pipeline) | 🚀 **80% Faster Releases** |
 
 ---
 
-## 📂 Repository Directory Map
+## 🎓 Education, Certifications & Credentials
 
-```
-├── 01_agentic_patterns/            # Stateful Multi-Agent StateGraph & Checkpointing
-│   ├── README.md                   # Architecture Overview & Sequence Diagrams
-│   └── state_graph_blueprint.py    # Executable Pydantic Schemas & Reducers
-├── 02_vector_retrieval_rbac/       # Identity-Aware Entra ID RBAC Vector Search
-│   ├── README.md                   # Zero-Trust Ingestion & RRF Specifications
-│   └── rbac_rag_blueprint.py       # Executable Pydantic Schemas & ACL Engine
-├── 03_mcp_gateway/                 # Centralized Model Context Protocol (MCP) Gateway
-│   ├── README.md                   # JSON-RPC 2.0 Specs & Circuit Breaker Logic
-│   └── mcp_gateway_blueprint.py    # Executable Pydantic Schemas & Dispatcher
-├── 04_cost_and_governance/         # Semantic Caching, Model Routing & Guardrails
-│   ├── README.md                   # Two-Tier Cache & OWASP Top 10 Guardrails
-│   └── governance_caching_blueprint.py # Executable Complexity Scorer & Cache Sim
-├── genai_enterprise_usecases/      # 21 Production Enterprise Reference Implementations
-│   └── ARCHITECTURE_GUIDE.md       # Master Technical Specs for All 21 Use Cases
-├── genai_design_patterns/          # 7 Production Multi-Agent Design Pattern Specs
-└── README.md                       # Master Portfolio Showcase & Executive Profile
-```
+* **Education:** Bachelor of Technology (B.Tech) in Computer Science & Engineering | Vellore Institute of Technology (VIT), India
+* **United States Patent:** [US Patent #7756878 B2](https://patents.google.com/patent/US7756878B2/en) — *System and Method for Enterprise Processing*
+* **Google Skills Badges:** **27 Verified Certifications** ([Public Profile](https://skills.google/public_profiles/72d3c0e5-1a82-48d6-943f-0df7395e4263)) — AI/ML, Cloud Infrastructure, Data Engineering, and Solutions Architecture
+* **Technical Certifications:** Sun Certified Java Programmer (SCJP)
 
 ---
 
 ## 🔒 Enterprise IP & Governance Statement
 
-In strict compliance with enterprise intellectual property governance and non-disclosure standards, this portfolio contains **100% sanitized reference architectures, typed Pydantic models, and architectural sequence blueprints**. No client data, proprietary business logic, or active private API keys are contained in this public repository.
+In strict accordance with corporate intellectual property governance and non-disclosure standards, this public repository contains **100% sanitized reference architectures, typed Pydantic models, and architectural sequence blueprints**. No proprietary client data, business logic, or active private API keys are contained in this repository.
 
 ---
 
 <div align="center">
 
 **Enterprise GenAI Portfolio of Sri Cherukuri**  
-*US Patent Holder #7756878 | Principal GenAI Architect*  
-[Connect on LinkedIn](https://www.linkedin.com/in/sricheru/) • [GitHub Profile](https://github.com/sricheru)
+*Principal GenAI Architect | Forward Deployment Lead (FDE)*  
+[LinkedIn](https://linkedin.com/in/sri-cherukuri-genai-architect) • [GitHub](https://github.com/sricheru/agentic-ai-portfolio) • [Google Skills](https://skills.google/public_profiles/72d3c0e5-1a82-48d6-943f-0df7395e4263)
 
 </div>
