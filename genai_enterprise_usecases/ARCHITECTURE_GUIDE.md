@@ -1,52 +1,52 @@
 # GenAI Enterprise Use Cases - Master Architecture Guide
 
-This document details the architecture, component flow, and technical implementation for 20 Enterprise GenAI projects.
+This document details the architecture, component flow, and technical implementation for 20 Enterprise GenAI reference architectures.
 
 ---
 
 ## 1. Model Context Protocol (MCP) Server
-**Goal:** Standardize AI agent interactions with external data sources using the open MCP standard.
+**Goal:** Standardize AI agent interactions with external enterprise data sources using the open Model Context Protocol (MCP).
 
 ### Architecture
 ```mermaid
 graph TD
-    Client["AI Agent Client"] -->|JSON-RPC Request| API[FastAPI Server]
-    API -->|Route Handler| Manager[MCP Manager]
-    Manager -->|Query| DB["SQLite Database"]
-    DB -->|Result| Manager
-    Manager -->|JSON-RPC Response| Client
+    Client["AI Agent Client"] -->|1. JSON-RPC Request| Gateway["FastAPI MCP Gateway"]
+    Gateway -->|2. Route to Tool| ToolManager["MCP Tool Manager"]
+    ToolManager -->|3. Query Enterprise DB| Database["SQLite / Postgres DB"]
+    Database -->|4. Tool Results| Formatter["MCP ToolResult Formatter"]
+    Formatter -->|5. Standardized Response| Client
 ```
 
 ### Component Flow
 1. **Client Request**: Agent sends a `call_tool` request (e.g., `get_customer_data`) via HTTP/SSE.
-2. **Protocol Parsing**: `mcp_server` parses the JSON-RPC message.
-3. **Execution**: Server executes the corresponding Python function (e.g., querying CRM database).
-4. **Response**: Data is formatted as an MCP `ToolResult` and sent back to the agent.
+2. **Protocol Parsing**: Gateway parses and validates the JSON-RPC 2.0 message.
+3. **Execution**: Server executes the corresponding Python tool function with parameter validation.
+4. **Response**: Data is formatted as a standardized MCP `ToolResult` and returned to the agent.
 
 ---
 
-## 2. Agent-to-Agent Communication
+## 2. Agent-to-Agent Communication (A2A)
 **Goal:** Enable autonomous coordination between specialized agents using an Event-Driven architecture.
 
 ### Architecture
 ```mermaid
 sequenceDiagram
-    participant User
-    participant SupportAgent
-    participant Redis as Redis Pub/Sub
-    participant OrderAgent
-    User->>SupportAgent: "Where is my order #123?"
-    SupportAgent->>Redis: Publish event: request.order_info
-    Redis->>OrderAgent: Deliver event
-    OrderAgent->>OrderAgent: Fetch Order Status
-    OrderAgent->>Redis: Publish event: response.order_info
-    Redis->>SupportAgent: Deliver response
-    SupportAgent->>User: "Your order is shipped."
+    participant User as End User
+    participant SupportAgent as Support Triage Agent
+    participant Bus as Redis Event Bus
+    participant OrderAgent as Order Fulfillment Agent
+    User->>SupportAgent: Inquire about Order #123
+    SupportAgent->>Bus: Publish request.order_info
+    Bus->>OrderAgent: Deliver event to subscriber
+    OrderAgent->>OrderAgent: Fetch order status from ERP
+    OrderAgent->>Bus: Publish response.order_info
+    Bus->>SupportAgent: Deliver payload to callback channel
+    SupportAgent->>User: Return formatted status update
 ```
 
 ### Component Flow
 1. **Event Trigger**: Source agent publishes a task/query to a Redis channel.
-2. **Routing**: The message broker (Redis) distributes the event to subscribed agents.
+2. **Routing**: The message broker (Redis Pub/Sub) distributes the event to subscribed agents.
 3. **Async Processing**: Target agent (`OrderAgent`) wakes up, processes the payload, and performs the task.
 4. **Callback**: The result is published back to a response channel, allowing the original agent to proceed.
 
@@ -58,19 +58,20 @@ sequenceDiagram
 ### Architecture
 ```mermaid
 graph LR
-    Start --> Router{Router Node}
-    Router -->|Doc Analysis| Classifier[Classifier Agent]
-    Router -->|Extraction| Extractor[Extractor Agent]
-    Classifier --> State[Shared State]
-    Extractor --> State
-    State -->|Update| Router
-    Router -->|Done| EndNode["End"]
+    StartNode["Input Query"] --> Router{"Router Agent"}
+    Router -->|Document Analysis| Classifier["Document Classifier"]
+    Router -->|Data Extraction| Extractor["Entity Extractor"]
+    Classifier --> StateReducer["Shared State Container"]
+    Extractor --> StateReducer
+    StateReducer --> Evaluator{"Quality Evaluator"}
+    Evaluator -->|Score < 0.85| Router
+    Evaluator -->|Score >= 0.85| EndNode["Final Output"]
 ```
 
 ### Component Flow
 1. **State Initialization**: A global `StateDict` is created with input data.
 2. **Node Execution**: The graph executes nodes (Agents) based on current state.
-3. **Conditional Edges**: Logic determines next step (e.g., "If confidence < 0.8, retry").
+3. **Conditional Edges**: Logic determines next step (e.g., "If confidence < 0.85, retry").
 4. **Conclusion**: Workflow terminates when the `END` node is reached, returning final state.
 
 ---
@@ -81,14 +82,15 @@ graph LR
 ### Architecture
 ```mermaid
 graph TD
-    Docs["PDF and Text Documents"] -->|Ingest| Splitter[Text Splitter]
-    Splitter -->|Embed| Model[Embedding Model]
-    Model -->|Upsert| VectorDB["Chroma and Qdrant Vector Store"]
-    User -->|Query| Chain[RAG Chain]
-    Chain -->|Search| VectorDB
-    VectorDB -->|Context| Chain
-    Chain -->|Prompt| LLM
-    LLM -->|Answer| User
+    Docs["PDF and Text Documents"] --> Ingestion["Text Chunking & Splitting"]
+    Ingestion --> Embedder["Embedding Service"]
+    Embedder --> VectorDB["Chroma / Qdrant Vector Store"]
+
+    User["User Query"] --> QueryEngine["RAG Retrieval Chain"]
+    QueryEngine -->|Semantic Similarity Search| VectorDB
+    VectorDB -->|Retrieved Context Chunks| ContextBuilder["Context Prompt Builder"]
+    ContextBuilder --> LLM["LLM Generation"]
+    LLM --> Answer["Grounded Response"]
 ```
 
 ### Component Flow
@@ -99,18 +101,19 @@ graph TD
 
 ---
 
-## 5. Autonomous Agent
+## 5. Autonomous ReAct Agent
 **Goal:** An agent capable of planning and executing multi-step goals using tools (ReAct Pattern).
 
 ### Architecture
 ```mermaid
 graph TD
-    Goal[User Goal] --> Planner[Planning Engine]
-    Planner -->|Thought| Loop{Execution Loop}
-    Loop -->|Action| Tool[Tool Interface]
-    Tool -->|Observation| Loop
-    Loop -->|Reasoning| Loop
-    Loop -->|Final Answer| Result
+    Goal["User Goal"] --> Planner["Planning Engine"]
+    Planner --> Loop{"Thought-Action Loop"}
+    Loop -->|Select Tool| ToolDispatcher["Tool Interface"]
+    ToolDispatcher -->|Execute API| Env["External Environment"]
+    Env -->|Tool Observation| Reasoning["Reasoning Engine"]
+    Reasoning -->|Update Context| Loop
+    Loop -->|Goal Satisfied| Result["Final Answer"]
 ```
 
 ### Component Flow
@@ -121,17 +124,17 @@ graph TD
 
 ---
 
-## 6. Advanced Prompt Engineering
+## 6. Advanced Prompt Engineering Lab
 **Goal:** Framework for managing, optimizing, and evaluating complex prompt strategies.
 
 ### Architecture
 ```mermaid
 graph LR
-    User --> Template[Prompt Template]
-    Template -->|Inject Variables| Logic[Prompt Manager]
-    Logic -->|Chain-of-Thought| LLM
-    LLM -->|Result| Eval[Evaluation]
-    Eval -->|Feedback| Logic
+    UserQuery["User Query"] --> Template["Prompt Template Engine"]
+    Template --> Logic["Prompt Strategy Manager"]
+    Logic --> LLM["LLM Inference"]
+    LLM --> Eval["Evaluation & Scoring"]
+    Eval -->|Optimization Feedback| Template
 ```
 
 ### Component Flow
@@ -147,11 +150,13 @@ graph LR
 ### Architecture
 ```mermaid
 graph TD
-    Code[Git Repo] -->|Push| CI[GitHub Actions]
-    CI -->|Test| Pytest[Unit Tests]
-    CI -->|Eval| Ragas[Quality Eval]
-    Ragas -->|Pass| CD[Deploy]
-    CD -->|Update| Prod[Production Env]
+    Code["Git Push"] --> CI["GitHub Actions Runner"]
+    CI --> Lint["Ruff Lint & Type Check"]
+    Lint --> Security["Bandit & Gitleaks Scan"]
+    Security --> Pytest["Unit Tests (>85% Gate)"]
+    Pytest --> Ragas["RAGAS Eval Benchmark"]
+    Ragas -->|Pass (>=0.85)| CD["Deploy Canary Pods"]
+    CD --> Prod["Production EKS Cluster"]
 ```
 
 ### Component Flow
@@ -162,17 +167,17 @@ graph TD
 
 ---
 
-## 8. Vector Database Implementation
+## 8. Vector Database Engine
 **Goal:** Scalable storage and retrieval of high-dimensional embeddings.
 
 ### Architecture
 ```mermaid
 graph TD
-    Data --> Embedder[Embedding Service]
-    Embedder -->|Vectors| Qdrant["Qdrant Cluster"]
-    Qdrant -->|HNSW Index| Storage
-    Query -->|Search| Qdrant
-    Qdrant -->|ANN| Results
+    RawData["Raw Documents"] --> Embedder["Embedding Service"]
+    Embedder -->|Dense Vectors| QdrantCluster["Qdrant Vector Cluster"]
+    QdrantCluster --> Index["HNSW Indexing Engine"]
+    QueryVector["Query Vector"] --> Index
+    Index -->|ANN Cosine Distance| RankedResults["Top-K Matching Chunks"]
 ```
 
 ### Component Flow
@@ -188,35 +193,36 @@ graph TD
 ### Architecture
 ```mermaid
 graph TD
-    Query --> Dense["Vector Search Semantic"]
-    Query --> Sparse["BM25 Keyword Search"]
-    Dense --> Results1
-    Sparse --> Results2
-    Results1 --> Fusion[Reciprocal Rank Fusion]
-    Results2 --> Fusion[Reciprocal Rank Fusion]
-    Fusion --> Final[Ranked List]
+    Query["User Query"] --> Dense["Vector Search (Semantic)"]
+    Query --> Sparse["BM25 Search (Keyword)"]
+    Dense --> DenseHits["Dense Score List"]
+    Sparse --> SparseHits["Sparse Score List"]
+    DenseHits --> RRF["Reciprocal Rank Fusion (RRF)"]
+    SparseHits --> RRF
+    RRF --> CrossEncoder["Cross-Encoder Reranker"]
+    CrossEncoder --> FinalResults["Top-K Re-ranked Documents"]
 ```
 
 ### Component Flow
 1. **Dual Retrieval**: Query is processed by both Vector DB and keyword engine (e.g., BM25).
 2. **Normalization**: Scores from both systems are normalized (0-1).
-3. **Fusion**: RRF (Reciprocal Rank Fusion) algorithm combines lists to prioritize documents found by both methods.
+3. **Fusion**: RRF algorithm combines lists to prioritize documents found by both methods.
 
 ---
 
-## 10. AI Guardrails
+## 10. AI Guardrails Gateway
 **Goal:** Ensure safety, compliance, and quality control on Model Inputs and Outputs.
 
 ### Architecture
 ```mermaid
 graph TD
-    Input --> PII[PII Detector]
-    PII -->|Pass| Topics[Topic Filter]
-    Topics -->|Pass| LLM
-    LLM --> LLMOutput["Model Output"]
-    LLMOutput["Model Output"] --> Hallucination[Fact Checker]
-    Hallucination -->|Safe| User
-    Hallucination -->|Unsafe| Block[Refusal Message]
+    RawInput["User Input"] --> PII["PII / PHI Redactor (spaCy NER)"]
+    PII -->|Cleaned Text| Sandbox["Prompt Injection Delimiter Guard"]
+    Sandbox -->|Safe Payload| Model["LLM Inference Engine"]
+    Model --> RawResponse["Model Response"]
+    RawResponse --> SchemaValidator["Pydantic V2 Schema Gate"]
+    SchemaValidator -->|Valid Schema| SafeOutput["Sanitized Response"]
+    SchemaValidator -->|Validation Error| Fallback["Safe Refusal Handler"]
 ```
 
 ### Component Flow
@@ -227,24 +233,22 @@ graph TD
 
 ---
 
-*(Continued in Part 2...)*
-
-## 11. Enterprise API
+## 11. Enterprise API Gateway
 **Goal:** Unified API Gateway pattern to abstract diverse enterprise backends (Salesforce, ServiceNow, Slack).
 
 ### Architecture
 ```mermaid
 graph TD
-    Client -->|API Request| Gateway[FastAPI Gateway]
-    Gateway -->|Auth| OAuth[OAuth2 Manager]
-    Gateway -->|Circuit Breaker| Service
-    Service -->|Retries| CRM[Salesforce Mock]
-    Service -->|Retries| ITSM[ServiceNow Mock]
-    Service -->|Retries| Chat[Slack Mock]
-    CRM --> |Response| Gateway
-    ITSM --> |Response| Gateway
-    Chat --> |Response| Gateway
-    Gateway -->|Unified JSON| Client
+    ClientApp["Client Application"] -->|API Request| Gateway["FastAPI Gateway"]
+    Gateway --> Auth["OAuth2 / JWT Claims Validator"]
+    Auth --> CircuitBreaker["Circuit Breaker & Rate Limiter"]
+    CircuitBreaker --> CRM["Salesforce Adapter"]
+    CircuitBreaker --> ITSM["ServiceNow Adapter"]
+    CircuitBreaker --> Slack["Slack API Adapter"]
+    CRM --> Normalizer["Unified Response Normalizer"]
+    ITSM --> Normalizer
+    Slack --> Normalizer
+    Normalizer --> ClientApp
 ```
 
 ### Component Flow
@@ -256,19 +260,18 @@ graph TD
 
 ---
 
-## 12. Responsible AI
+## 12. Responsible AI & Explainability
 **Goal:** Framework for fairness, bias detection, and explainability in model decisions.
 
 ### Architecture
 ```mermaid
 graph LR
-    Data --> Bias[Bias Detector]
-    Bias -->|Fairness Metrics| Dashboard
-    Data --> Model[Hiring Model]
-    Model --> Prediction
-    Model --> Explainer[SHAP Explainer]
-    Explainer -->|Feature Importance| Audit[Audit Log]
-    Prediction --> Audit
+    InputData["Candidate Profile"] --> BiasEngine["Fairness & Bias Detector"]
+    BiasEngine --> ModelInference["Decision Model"]
+    ModelInference --> Prediction["Model Decision"]
+    ModelInference --> SHAP["SHAP Feature Explainer"]
+    SHAP --> AuditTrail["Immutable Compliance Audit Log"]
+    Prediction --> AuditTrail
 ```
 
 ### Component Flow
@@ -279,17 +282,18 @@ graph LR
 
 ---
 
-## 13. Evaluation Pipeline
+## 13. RAGAS Quality Evaluation Pipeline
 **Goal:** Automated quality assurance using RAGAS metrics (Faithfulness, Answer Relevance).
 
 ### Architecture
 ```mermaid
 graph TD
-    Dataset[Golden Dataset] --> Eval[Evaluator]
-    RAG[RAG System] -->|Answer| Eval
-    Eval -->|Compute| Metrics[RAGAS Metrics]
-    Metrics -->|Score| Report[HTML Report]
-    Report -->|Alert| DevTeam
+    GoldenDataset["Golden Q&A Benchmark Dataset"] --> Evaluator["RAGAS Evaluation Engine"]
+    RAGSystem["Production RAG Pipeline"] -->|Actual Responses| Evaluator
+    Evaluator --> Metrics["Faithfulness & Relevance Scorer"]
+    Metrics --> ThresholdGate{"Quality Gate (Score >= 0.85)"}
+    ThresholdGate -->|Passed| ReleaseReport["Release Approval Dashboard"]
+    ThresholdGate -->|Failed| Alert["Regression Alert & Block PR"]
 ```
 
 ### Component Flow
@@ -300,21 +304,20 @@ graph TD
 
 ---
 
-## 14. Cost Optimization
-**Goal:** Reduce inference costs via Caching and Smart Routing.
+## 14. Cost Optimization & Semantic Caching
+**Goal:** Reduce inference costs via Two-Tier Caching and Cascading Model Routing.
 
 ### Architecture
 ```mermaid
 graph TD
-    UserQuery --> Cache{Semantic Cache}
-    Cache -->|Hit| Return[Cached Response]
-    Cache -->|Miss| Router{Model Router}
-    Router -->|Simple| GPT3["GPT-3.5 Model"]
-    Router -->|Complex| GPT4["GPT-4 Model"]
-    GPT3 --> |Response| Tracker[Cost Tracker]
-    GPT4 --> |Response| Tracker[Cost Tracker]
-    Tracker -->|Update| Cache
-    Tracker --> User
+    InboundQuery["User Query"] --> Cache{"Tier-1: Redis Semantic Cache"}
+    Cache -->|Cache Hit (>0.92 Sim)| ReturnCached["Return Cached Response (<15ms, $0)"]
+    Cache -->|Cache Miss| Router{"Tier-2: Cascading Model Router"}
+    Router -->|Simple Query| SmallModel["Gemini 1.5 Flash / GPT-4o-mini"]
+    Router -->|Complex Query| LargeModel["Claude 3.5 Sonnet / GPT-4o"]
+    SmallModel --> Tracker["Cost Tracker & Cache Updater"]
+    LargeModel --> Tracker
+    Tracker --> UserResponse["Client Response"]
 ```
 
 ### Component Flow
@@ -326,18 +329,18 @@ graph TD
 
 ---
 
-## 15. Model Routing
-**Goal:** Dynamically select the optimal LLM based on task complexity and context.
+## 15. Dynamic Model Routing
+**Goal:** Dynamically select the optimal LLM based on task complexity and context length.
 
 ### Architecture
 ```mermaid
 graph TD
-    Query --> Scorer[Complexity Scorer]
-    Scorer -->|Attributes| Router
-    Router -->|Match| Registry[Model Registry]
-    Registry -->|Select| Model
-    Model -->|Execute| Response
-    Response --> Logger[Decision Logger]
+    Prompt["Inbound Prompt"] --> Scorer["Complexity & Code Heuristic Scorer"]
+    Scorer --> Matcher["Registry Policy Matcher"]
+    Matcher --> Registry["Foundation Model Registry"]
+    Registry --> ExecutionEngine["LLM Execution Engine"]
+    ExecutionEngine --> DecisionLogger["Routing Decision Telemetry"]
+    DecisionLogger --> OutputResponse["Client Output"]
 ```
 
 ### Component Flow
@@ -348,19 +351,19 @@ graph TD
 
 ---
 
-## 16. HITL (Human-in-the-Loop) Workflow
-**Goal:** Human oversight for high-stakes agent actions.
+## 16. Human-in-the-Loop (HITL) Workflow
+**Goal:** Human oversight and verification for high-stakes agent actions.
 
 ### Architecture
 ```mermaid
 graph TD
-    Agent -->|Action Proposal| Policy{Policy Check}
-    Policy -->|Safe| Execute
-    Policy -->|Flagged| Queue[Approval Queue]
-    Queue -->|Wait| Human[Manager]
-    Human -->|Approve/Reject| Queue
-    Queue -->|Resume| Agent
-    Agent -->|Execute/Abort| Result
+    AgentProposal["Agent Action Proposal"] --> RiskEngine{"Risk Threshold Policy"}
+    RiskEngine -->|Low Risk (Auto)| ExecutionNode["Execute Production Mutation"]
+    RiskEngine -->|High Risk (Escalate)| EscalationQueue["Manager Approval Queue"]
+    EscalationQueue --> HumanReviewer["Human Approver / Manager"]
+    HumanReviewer -->|Approved| ExecutionNode
+    HumanReviewer -->|Rejected| AbortNode["Abort Action & Log Audit Trail"]
+    ExecutionNode --> Receipt["Transaction Confirmation Receipt"]
 ```
 
 ### Component Flow
@@ -372,18 +375,19 @@ graph TD
 
 ---
 
-## 17. Knowledge Graph
-**Goal:** GraphRAG for structured reasoning and relationship traversal.
+## 17. GraphRAG Knowledge Graph
+**Goal:** GraphRAG for structured reasoning and multi-hop relationship traversal.
 
 ### Architecture
 ```mermaid
 graph LR
-    Text --> Extractor[Entity Extractor]
-    Extractor -->|Triples| GraphDB["NetworkX and Neo4j"]
-    Query -->|Entities| GraphDB
-    GraphDB -->|Neighbors| Context
-    Context -->|Augment| LLM
-    LLM --> Answer
+    SourceDocs["Raw Unstructured Text"] --> Extractor["Entity-Relation Triple Extractor"]
+    Extractor --> GraphStore["NetworkX / Neo4j Graph DB"]
+    UserQuestion["User Question"] --> QuerySubGraph["2-Hop Subgraph Traversal"]
+    GraphStore --> QuerySubGraph
+    QuerySubGraph --> ContextPrompt["Augmented Structural Context"]
+    ContextPrompt --> LLMReasoning["LLM Multi-Hop Reasoning"]
+    LLMReasoning --> GroundedAnswer["Structured Graph-Grounded Answer"]
 ```
 
 ### Component Flow
@@ -394,17 +398,17 @@ graph LR
 
 ---
 
-## 18. Event-Driven Architecture
+## 18. Event-Driven Agentic Architecture
 **Goal:** Reactive agents capable of asynchronous processing via Message Bus.
 
 ### Architecture
 ```mermaid
 graph TD
-    Source[Order Service] -->|Publish| Bus["Kafka Message Bus"]
-    Bus -->|Subscribe| Consumer[Agent Consumer]
-    Consumer -->|Process| Logic[Business Logic]
-    Logic -->|Publish| Bus
-    Bus -->|Event| Inventory[Inventory Service]
+    OrderService["Order Ingestion Service"] -->|1. Publish Event| EventBus["Kafka Message Bus"]
+    EventBus -->|2. Route to Topic| AgentConsumer["Worker Agent Consumer"]
+    AgentConsumer -->|3. Async Processing| BusinessLogic["Autonomous Business Logic"]
+    BusinessLogic -->|4. Emit Status| EventBus
+    EventBus -->|5. Update CRM| DownstreamService["Downstream Notification Service"]
 ```
 
 ### Component Flow
@@ -415,17 +419,18 @@ graph TD
 
 ---
 
-## 19. Observability
-**Goal:** Full visibility into agent operations (Logs, Metrics, Traces).
+## 19. Full-Stack Observability & Tracing
+**Goal:** Full operational visibility into agent operations (Logs, Metrics, Traces).
 
 ### Architecture
 ```mermaid
 graph TD
-    Agent -->|Log Request| Logger[JSON Logger]
-    Agent -->|Measure Latency| Metrics[Prometheus Client]
-    Agent -->|Trace Span| Tracer[OpenTelemetry]
-    Metrics -->|Scrape| dashboard["Grafana and Prometheus"]
-    Tracer -->|Export| Jaeger["Console and Jaeger"]
+    AgentApp["Agent Execution Engine"] --> Logger["JSON Structured Logger"]
+    AgentApp --> Tracer["OpenTelemetry / Langfuse Tracer"]
+    AgentApp --> Metrics["Prometheus Telemetry Client"]
+    Logger --> LogAggregator["CloudWatch / Elastic Log Aggregator"]
+    Tracer --> LangfuseUI["Langfuse Distributed Tracing UI"]
+    Metrics --> Grafana["Grafana Real-Time SLO Dashboard"]
 ```
 
 ### Component Flow
@@ -436,18 +441,19 @@ graph TD
 
 ---
 
-## 20. Cloud Deployment
-**Goal:** Production-grade deployment on Kubernetes with IaC.
+## 20. Cloud Infrastructure Deployment
+**Goal:** Production-grade deployment on AWS EKS with Infrastructure-as-Code (Terraform).
 
 ### Architecture
 ```mermaid
 graph TD
-    Dev -->|Push| Loop["CI and CD Pipeline"]
-    Loop -->|Build| Docker[Docker Image]
-    Loop -->|Terraform| Infra[AWS EKS]
-    Loop -->|Helm and Manifests| K8s[Kubernetes Cluster]
-    K8s -->|Pod| Container[Agent Container]
-    Container -->|Service| LoadBalancer
+    DevCommit["Developer Git Push"] --> Pipeline["GitHub Actions CI/CD"]
+    Pipeline --> DockerBuild["Build & Cosign Docker Image"]
+    Pipeline --> Terraform["Terraform Cloud Provisioning"]
+    Terraform --> EKSCluster["AWS EKS Kubernetes Cluster"]
+    EKSCluster --> AgentPods["Horizontal Pod Autoscaler (HPA)"]
+    AgentPods --> LoadBalancer["AWS ALB Ingress Controller"]
+    LoadBalancer --> EndUsers["External Consumer Traffic"]
 ```
 
 ### Component Flow
