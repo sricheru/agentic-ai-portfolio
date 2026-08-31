@@ -61,7 +61,7 @@
 | **Executive Multimodal Intelligence Platform** | Gemini 1.5 Flash Multimodal Vision, Clean Architecture, Pydantic V2 | **<150–250ms P95 latency** for real-time document intelligence & executive entity resolution |
 | **Full-Stack Enterprise AI Platform** | Multi-Tenant AI SaaS (React 18 + TypeScript + FastAPI + Supabase + Stripe) | **Row Level Security (RLS)**, real-time SSE streaming, handles **10k+ concurrent mock requests** with multi-tenant isolation |
 | **Enterprise Real Estate Valuation Platform** | Commercial Document Analysis & Regulatory Reporting API (FastAPI + Pydantic Clean Arch) | High-throughput batch generation with zero-drift schema compliance and automated SEO enrichment |
-| **N8N Enterprise Automation Hub** | Event-Driven Autonomous Workflows (Salesforce, HubSpot, Slack, Jira) | **5,000+ events/month**, achieving **70–80% faster operational processing** over manual workflows |
+| **N8N Enterprise Automation Hub** | Event-Driven Autonomous Workflows (Salesforce, HubSpot, Slack, Jira) | Webhook orchestration integrating LLMs with CRM lead routing, payload schema validation, and alert dispatching |
 
 ---
 
