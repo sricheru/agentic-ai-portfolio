@@ -50,8 +50,7 @@
 
 * **Title:** *System and Method for Enterprise Processing*
 * **Patent Number:** [US Patent #7756878 B2](https://patents.google.com/patent/US7756878B2/en) *(Issued July 13, 2010)*
-* **Focus Area:** Enterprise processing architectures, automated workflow routing, and distributed business transaction processing.
-* **Significance:** Validates deep foundational expertise in engineering resilient, high-volume enterprise systems and complex transaction processing at scale, establishing the distributed systems discipline applied throughout this GenAI portfolio.
+* **Context:** Developed and issued as part of enterprise systems architecture work at **AT&T** (Assignee: AT&T Intellectual Property).
 
 ---
 
