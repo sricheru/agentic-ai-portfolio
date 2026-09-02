@@ -26,7 +26,7 @@
 * **Career Trajectory:** Senior Analyst → Lead Developer → Architect (2008–2022) → Principal Technical Architect II (2022–2023) → **Principal GenAI Architect / Forward Deployment Lead (2023–Present)**.
 * **Tier-1 Telecom Pedigree:** 
   * **Charter Communications (Principal Architect II, 2022–2023):** Architected core microservices serving **10M+ subscribers**; reduced system latency by **40%** through distributed systems optimization; established unified mobility framework.
-  * **AT&T (Technical Architect, 2008–2022):** Built **AIOps platform** with ML-based anomaly detection/remediation, reducing incident detection time by **70%**; architected mission-critical enterprise platforms serving **20M+ subscribers** at **99.9% uptime**.
+  * **AT&T (Technical Architect, 2008–2022):** Built **AIOps platform** with ML-based anomaly detection/remediation, reducing incident detection time by **70%**; architected mission-critical enterprise platforms serving **20M+ subscribers** at **99.9% uptime**; granted **US Patent #7756878** for enterprise processing architecture.
 * **Production Discipline:** Applying 15+ years of distributed systems resilience, fault-tolerance, and security engineering exclusively to Agentic AI and Forward Deployment AI systems.
 
 ---
@@ -377,6 +377,7 @@ sequenceDiagram
 ## 🎓 Education, Certifications & Credentials
 
 * **Education:** Bachelor of Technology (B.Tech) in Computer Science & Engineering | Vellore Institute of Technology (VIT), India
+* **United States Patent:** [US Patent #7756878 B2](https://patents.google.com/patent/US7756878B2/en) *(System and Method for Enterprise Processing — Issued July 13, 2010, Assignee: AT&T Intellectual Property)*
 * **Google Skills Badges:** **27 Verified Certifications** ([Public Profile](https://skills.google/public_profiles/72d3c0e5-1a82-48d6-943f-0df7395e4263)) — AI/ML, Cloud Infrastructure, Data Engineering, and Solutions Architecture
 * **Technical Certifications:** Sun Certified Java Programmer (SCJP)
 * **Model Fine-Tuning:** Familiar with PEFT (Parameter-Efficient Fine-Tuning) and LoRA (Low-Rank Adaptation) for adapting foundation models to domain-specific enterprise tasks
