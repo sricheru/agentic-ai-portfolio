@@ -366,9 +366,8 @@ sequenceDiagram
 ├── 06_llmops_ragas_eval/           # 6-Stage LLMOps Pipeline & Automated RAGAS Eval
 │   ├── README.md                   # CI/CD Quality Gate (>=0.85) & Canary Deployment
 │   └── ragas_eval_pipeline_blueprint.py # Executable Golden Dataset Benchmarking
-├── genai_enterprise_usecases/      # 25+ Production Enterprise Reference Implementations
-│   └── ARCHITECTURE_GUIDE.md       # Master Technical Specs for All 25+ Use Cases
-├── genai_design_patterns/          # 7 Production Multi-Agent Design Pattern Specs
+├── .gitignore                      # Git Exclusion Rules (Bytecode, Secrets, Env)
+├── LICENSE                         # Proprietary Reference & Evaluation License
 └── README.md                       # Master Portfolio Showcase & Executive Profile
 ```
 
