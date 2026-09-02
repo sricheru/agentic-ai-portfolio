@@ -1,7 +1,7 @@
 """
 ================================================================================
 Enterprise Architecture Blueprint: Two-Tier Semantic Caching & Model Routing
-Author: Sri Cherukuri (US Patent #7756878)
+Author: Sri Cherukuri
 Domain: Cost Governance, LLMOps & Production Resilience
 ================================================================================
 Overview:

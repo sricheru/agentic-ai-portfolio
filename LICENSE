@@ -1,0 +1,17 @@
+# Proprietary Reference Architecture & Evaluation License
+
+Copyright (c) 2024–2026 Sri Cherukuri. All Rights Reserved.
+
+## Terms of Evaluation
+
+This repository contains sanitized enterprise architecture blueprints, Pydantic schemas, and reference specifications authored by Sri Cherukuri.
+
+Permission is hereby granted to prospective employers, hiring committees, clients, and technical evaluators to inspect, review, and evaluate the materials contained herein for the sole purpose of assessing candidate qualifications and architectural competencies.
+
+## Restrictions
+
+1. **No Commercial Use:** Commercial reproduction, modification, distribution, sublicensing, or integration of this codebase into proprietary commercial products without prior written authorization from the author is strictly prohibited.
+2. **No Unauthorized Redistribution:** Public re-hosting, wholesale cloning, or presenting this work as original work by third parties is prohibited.
+3. **No Automated Training / Data Scraping:** Unauthorized automated data extraction or scraping of these architectural blueprints for public dataset distribution is not permitted.
+
+For technical deep-dive inquiries or commercial licensing, please contact Sri Cherukuri via [LinkedIn](https://linkedin.com/in/sri-cherukuri-genai-architect).

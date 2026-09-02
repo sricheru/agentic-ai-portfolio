@@ -1,7 +1,7 @@
 """
 ================================================================================
 Enterprise Architecture Blueprint: Identity-Aware Entra ID RBAC Vector Search
-Author: Sri Cherukuri (US Patent #7756878)
+Author: Sri Cherukuri
 Domain: Enterprise Retrieval & Zero-Trust Vector Security
 ================================================================================
 Overview:

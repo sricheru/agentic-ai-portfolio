@@ -1,7 +1,7 @@
 """
 ================================================================================
 Enterprise Architecture Blueprint: Adaptive Agentic RAG (Corrective & Self-RAG)
-Author: Sri Cherukuri (US Patent #7756878)
+Author: Sri Cherukuri
 Domain: Agentic Retrieval-Augmented Generation & Self-Corrective Loops
 ================================================================================
 Overview:

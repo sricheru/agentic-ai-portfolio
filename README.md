@@ -7,7 +7,6 @@
 📍 Dallas–Fort Worth, TX (Frisco)  
 🔗 [LinkedIn Profile](https://linkedin.com/in/sri-cherukuri-genai-architect) • 💻 [GitHub Portfolio](https://github.com/sricheru/agentic-ai-portfolio) • 🎖️ [Google Skills (27 Certs)](https://skills.google/public_profiles/72d3c0e5-1a82-48d6-943f-0df7395e4263)
 
-[![Patent](https://img.shields.io/badge/US_Patent-%237756878-gold?style=for-the-badge&logo=shield)](https://patents.google.com/patent/US7756878B2/en)
 [![Scale](https://img.shields.io/badge/Enterprise_Scale-AT%26T_(20M%2B)_%7C_Charter_(10M%2B)-blue?style=for-the-badge&logo=tower)](https://github.com/sricheru)
 [![Orchestration](https://img.shields.io/badge/Agentic_AI-LangGraph_StateGraph-green?style=for-the-badge&logo=python)](./01_agentic_patterns/)
 [![Security](https://img.shields.io/badge/Zero--Trust_RAG-Entra_ID_RBAC-purple?style=for-the-badge&logo=microsoft)](./02_vector_retrieval_rbac/)
@@ -36,20 +35,13 @@
 
 | Domain | Technologies |
 | :--- | :--- |
-| **Agentic AI & LLM Orchestration** | LangGraph StateGraph · LangChain · OpenAI GPT-4o · Anthropic Claude 3.5 · Google Gemini 1.5 · Llama 3 · Hugging Face Transformers · LlamaIndex · Semantic Kernel · Few-Shot / Chain-of-Thought Prompting |
+| **Agentic AI & LLM Orchestration** | LangGraph StateGraph · LangChain · OpenAI GPT-4o · Anthropic Claude 3.5 Sonnet · Google Gemini 1.5/2.0 · Llama 3 · Hugging Face Transformers · LlamaIndex · Semantic Kernel · Few-Shot / Chain-of-Thought Prompting |
 | **RAG & Vector Search** | Qdrant (HNSW) · Chroma · FAISS · Pinecone · Hybrid BM25 + Dense Retrieval · Reciprocal Rank Fusion (RRF) · Cross-Encoder Reranking · Redis Semantic Caching · Embedding Models (OpenAI / Cohere) · Context Window Optimization |
 | **Programming & Frameworks** | Python (Advanced) · TypeScript · JavaScript · FastAPI · React 18 · Next.js 14 · Streamlit · asyncio · Pydantic V2 · Node.js |
 | **Enterprise Integration & Workflow** | Model Context Protocol (MCP Server) · N8N · Kafka · Redis Pub/Sub · Salesforce · ServiceNow · Jira · Slack · HubSpot · PagerDuty · Event-Driven Architectures · HITL Approval Gates |
 | **Security & Governance** | OWASP LLM Top 10 Mitigation · PII/PHI Redaction (spaCy NER) · Prompt Injection XML Sandboxing · Pydantic V2 Output Validation · Microsoft Entra ID (Azure AD) RBAC · Zero-Trust Retrieval |
-| **Cloud & LLMOps** | AWS Bedrock / PrivateLink / EKS · Azure OpenAI / AI Foundry · Vertex AI / Gemini API · Docker · Kubernetes · Terraform · GitHub Actions CI/CD · RAGAS · Langfuse (OSS Tracing) · Prometheus · OpenTelemetry · PostgreSQL (Supabase RLS) · Redis |
+| **Cloud & LLMOps** | AWS Bedrock / PrivateLink / EKS · Azure OpenAI / AI Foundry · Google Vertex AI / Gemini API · Docker · Kubernetes · Terraform · GitHub Actions CI/CD · RAGAS · Langfuse (OSS Tracing) · Prometheus · OpenTelemetry · PostgreSQL (Supabase RLS) · Redis |
 | **Classical ML & Data Science** | Scikit-learn · PyTorch · TensorFlow · spaCy · NLTK · Word2Vec · Knowledge Graphs · Anomaly Detection · Supervised/Unsupervised Learning · CNNs · PEFT / LoRA Fine-Tuning Concepts |
-
----
-
-## 📜 Intellectual Property: US Patent #7756878
-
-* **Patent Number:** [US Patent #7756878 B2](https://patents.google.com/patent/US7756878B2/en) *(Issued July 13, 2010)*
-* **Context:** Developed and issued as part of enterprise architecture work at **AT&T** (Assignee: AT&T Intellectual Property).
 
 ---
 
@@ -385,7 +377,6 @@ sequenceDiagram
 ## 🎓 Education, Certifications & Credentials
 
 * **Education:** Bachelor of Technology (B.Tech) in Computer Science & Engineering | Vellore Institute of Technology (VIT), India
-* **United States Patent:** [US Patent #7756878 B2](https://patents.google.com/patent/US7756878B2/en) *(Issued July 13, 2010)*
 * **Google Skills Badges:** **27 Verified Certifications** ([Public Profile](https://skills.google/public_profiles/72d3c0e5-1a82-48d6-943f-0df7395e4263)) — AI/ML, Cloud Infrastructure, Data Engineering, and Solutions Architecture
 * **Technical Certifications:** Sun Certified Java Programmer (SCJP)
 * **Model Fine-Tuning:** Familiar with PEFT (Parameter-Efficient Fine-Tuning) and LoRA (Low-Rank Adaptation) for adapting foundation models to domain-specific enterprise tasks

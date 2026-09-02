@@ -1,7 +1,7 @@
 """
 ================================================================================
 Enterprise Architecture Blueprint: Centralized Model Context Protocol (MCP) Gateway
-Author: Sri Cherukuri (US Patent #7756878)
+Author: Sri Cherukuri
 Domain: Standardized Tool Interoperability & Zero-Trust Tool Governance
 ================================================================================
 Overview:

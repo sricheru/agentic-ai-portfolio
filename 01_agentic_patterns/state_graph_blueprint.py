@@ -1,7 +1,7 @@
 """
 ================================================================================
 Enterprise Architecture Blueprint: Stateful Multi-Agent StateGraph
-Author: Sri Cherukuri (US Patent #7756878)
+Author: Sri Cherukuri
 Domain: Multi-Agent Orchestration & Resilient State Persistence
 ================================================================================
 Overview:

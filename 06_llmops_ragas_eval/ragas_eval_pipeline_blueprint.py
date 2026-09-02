@@ -1,7 +1,7 @@
 """
 ================================================================================
 Enterprise Architecture Blueprint: 6-Stage LLMOps Pipeline & RAGAS Evaluation
-Author: Sri Cherukuri (US Patent #7756878)
+Author: Sri Cherukuri
 Domain: LLMOps CI/CD, Automated Quality Gates & Telemetry Observability
 ================================================================================
 Overview:
